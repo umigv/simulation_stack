@@ -27,7 +27,7 @@ def generate_launch_description():
 
 
     # Configure the node
-    node_robot_state_publisher = Node(
+    robot_state_publisher_node = Node(
         package='robot_state_publisher',
         executable='robot_state_publisher',
         output='screen',
@@ -73,25 +73,7 @@ def generate_launch_description():
                                         ('/cloud_in', '/velodyne_points'),
                                         ('/scan', '/laser_scan'),
                                    ])
-    
-    robot_state_publisher_node = Node(
-        package='robot_state_publisher',
-        executable='robot_state_publisher',
-        parameters=[{'robot_description': Command(['xacro ', LaunchConfiguration('model')])}]
-    )
 
-    joint_state_publisher_node = Node(
-        package='joint_state_publisher',
-        executable='joint_state_publisher',
-        name='joint_state_publisher',
-        condition=UnlessCondition(LaunchConfiguration('gui'))
-    )
-    joint_state_publisher_gui_node = Node(
-        package='joint_state_publisher_gui',
-        executable='joint_state_publisher_gui',
-        name='joint_state_publisher_gui',
-        condition=IfCondition(LaunchConfiguration('gui'))
-    )
     rviz_node = Node(
         package='rviz2',
         executable='rviz2',
@@ -100,7 +82,7 @@ def generate_launch_description():
         arguments=['-d', LaunchConfiguration('rvizconfig')],
     )
 
-    default_rviz_config_path = os.path.join(get_package_share_directory(pkg_name), 'rviz/simulation_config.rviz')
+    default_rviz_config_path = os.path.join(get_package_share_directory(pkg_name), 'rviz/simulation.rviz')
 
     # Run the node
     return LaunchDescription([
@@ -110,13 +92,10 @@ def generate_launch_description():
                                             description='Absolute path to robot urdf file'),
         DeclareLaunchArgument(name='rvizconfig', default_value=default_rviz_config_path,
                                             description='Absolute path to rviz config file'),
-        joint_state_publisher_node,
-        joint_state_publisher_gui_node,
         robot_state_publisher_node,
-        rviz_node,
         gazebo_server, 
         gazebo_client,
-        node_robot_state_publisher,
         spawn_entity,
-        pointcloud_to_laserscan
+        pointcloud_to_laserscan,
+        rviz_node,
     ])
