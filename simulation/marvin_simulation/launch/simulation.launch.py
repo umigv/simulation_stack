@@ -12,54 +12,48 @@ import xacro
 
 
 def generate_launch_description():
-
-    # Specify the name of the package and path to xacro file within the package
+    # Constants
     pkg_name = 'marvin_simulation'
-    model_subpath = 'urdf/marvin.xacro'
-    world_subpath = 'worlds/course.world'
-    launch_dir = os.path.join(get_package_share_directory(pkg_name), 'launch')
+    model = os.path.join(get_package_share_directory(pkg_name), 'urdf', 'marvin.xacro') 
+    world = os.path.join(get_package_share_directory(pkg_name), 'worlds', 'course.world')
+    launch = os.path.join(get_package_share_directory(pkg_name), 'launch')
+    robot_description = xacro.process_file(model).toxml()
 
-    world = os.path.join(get_package_share_directory(pkg_name), world_subpath)
-
-    # Use xacro to process the file
-    xacro_file = os.path.join(get_package_share_directory(pkg_name), model_subpath)
-    robot_description_raw = xacro.process_file(xacro_file).toxml()
-
-
-    # Configure the node
+    # Robot
     robot_state_publisher_node = Node(
         package='robot_state_publisher',
         executable='robot_state_publisher',
         output='screen',
-        parameters=[{'robot_description': robot_description_raw,
-        'use_sim_time': True}] # add other parameters here if required
+        parameters=[{'robot_description': robot_description,
+                     'use_sim_time': True}]
     )
 
+    # Gazebo
     gazebo_server = ExecuteProcess(
         cmd=[
             'gzserver',
             '--verbose',
-            '-s',
-            'libgazebo_ros_init.so',
-            '-s',
-            'libgazebo_ros_factory.so',
+            '-s', 'libgazebo_ros_init.so',
+            '-s', 'libgazebo_ros_factory.so',
             world,
         ],
         output='screen',
-        cwd=[launch_dir]
+        cwd=[launch]
     )
 
     gazebo_client = ExecuteProcess(
         cmd=['gzclient'],
         output='screen',
-        cwd=[launch_dir]
+        cwd=[launch]
     )
 
-    spawn_entity = Node(package='gazebo_ros', executable='spawn_entity.py',
-                    arguments=['-topic', 'robot_description',
-                                '-entity', 'marvin'],
-                    output='screen')
+    spawn_robot = Node(package='gazebo_ros', 
+                       executable='spawn_entity.py',
+                       arguments=['-topic', 'robot_description', '-entity', 'marvin'],
+                       output='screen'
+    )
 
+    # Pointcloud to laserscan
     pointcloud_to_laserscan = Node(package='pointcloud_to_laserscan', 
                                    executable='pointcloud_to_laserscan_node', 
                                    ros_arguments=[
@@ -72,30 +66,25 @@ def generate_launch_description():
                                    remappings=[
                                         ('/cloud_in', '/velodyne_points'),
                                         ('/scan', '/laser_scan'),
-                                   ])
+                                   ]
+    )
+
+    #RViz
+    rviz_config_path = os.path.join(get_package_share_directory(pkg_name), 'rviz/simulation.rviz')
 
     rviz_node = Node(
         package='rviz2',
         executable='rviz2',
         name='rviz2',
         output='screen',
-        arguments=['-d', LaunchConfiguration('rvizconfig')],
+        arguments=['-d', rviz_config_path]
     )
 
-    default_rviz_config_path = os.path.join(get_package_share_directory(pkg_name), 'rviz/simulation.rviz')
-
-    # Run the node
     return LaunchDescription([
-        DeclareLaunchArgument(name='gui', default_value='True',
-                                            description='Flag to enable joint_state_publisher_gui'),
-        DeclareLaunchArgument(name='model', default_value=xacro_file,
-                                            description='Absolute path to robot urdf file'),
-        DeclareLaunchArgument(name='rvizconfig', default_value=default_rviz_config_path,
-                                            description='Absolute path to rviz config file'),
         robot_state_publisher_node,
         gazebo_server, 
         gazebo_client,
-        spawn_entity,
+        spawn_robot,
         pointcloud_to_laserscan,
         rviz_node,
     ])
