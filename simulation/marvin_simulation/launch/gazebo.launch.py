@@ -18,7 +18,6 @@ def generate_launch_description():
     launch_dir = os.path.join(get_package_share_directory(pkg_name), 'launch')
 
     world = os.path.join(get_package_share_directory(pkg_name), world_subpath)
-    print(world)
 
     # Use xacro to process the file
     xacro_file = os.path.join(get_package_share_directory(pkg_name), model_subpath)

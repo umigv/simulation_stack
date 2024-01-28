@@ -161,7 +161,19 @@
 	</xacro:wheel>
 
 
-    <!-- Sim Camera -->
+    <!-- ZED Camera -->
+	<xacro:include filename="$(find zed_wrapper)/urdf/zed_macro.urdf.xacro" />
+	<xacro:zed_camera name="zed" model="zed">
+	</xacro:zed_camera>
+
+	<joint name="zed_camera_joint" type="fixed">
+		<origin xyz="${camera_x_offset} 0 ${camera_z_offset}" rpy="0 ${camera_angle} 0" />
+		<parent link="base_link" />
+		<child link="zed_camera_link" />
+	</joint>
+
+
+	<!-- Sim Camera -->
 	<xacro:include filename="$(find marvin_simulation)/urdf/camera.xacro" />
 	<xacro:camera mass="${camera_mass}">
 		<origin xyz="${camera_x_offset} 0 ${camera_z_offset}" rpy="0 ${camera_angle} 0" />
