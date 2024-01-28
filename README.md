@@ -1,2 +1,3 @@
-# nav_stack
-Clone this repo into src directory. 
+# Simulation Stack
+
+Click into each package to read package-specific documentations

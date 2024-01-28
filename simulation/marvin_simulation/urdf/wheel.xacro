@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="wheel">
+    <xacro:macro name="wheel" params="prefix mass radius width *joint_origin">
+        <xacro:include filename="$(find marvin_simulation)/urdf/inertia.xacro"/>
+
+        <link name="${prefix}_wheel">
+            <xacro:cylinder_inertia mass="${mass}" radius="${radius}" height="${width}">
+                <origin xyz="0 0 0" rpy="0 0 0" />
+            </xacro:cylinder_inertia>
+
+            <visual>
+                <origin xyz="0 0 0" rpy="0 ${pi/2} ${pi/2}" />
+                <geometry>
+                    <cylinder radius="${radius}" length="${width}" />   
+                </geometry>
+            </visual>
+    
+            <collision>
+                <origin xyz="0 0 0" rpy="0 ${pi/2} ${pi/2}" />
+                <geometry>
+                    <cylinder radius="${radius}" length="${width}" />
+                </geometry>
+            </collision>
+        </link>
+
+        <joint type="continuous" name="${prefix}_wheel_joint">
+            <xacro:insert_block name="joint_origin" />
+            <parent link="base_link" />
+            <child link="${prefix}_wheel" />
+            <axis xyz="0 1 0" rpy="0 0 0" />
+            <limit effort="1000" velocity="1000"/>
+            <dynamics damping="0.0001"/>
+        </joint>
+
+        <gazebo reference="${prefix}_wheel">
+            <material>Gazebo/Green</material>
+            <mu1 value="1.0"/>
+            <mu2 value="1.0"/>
+            <kp value="10000000.0" />
+            <kd value="1.0" />
+            <maxVel>1.0</maxVel>
+            <minDepth>0.00</minDepth>
+        </gazebo>
+    </xacro:macro>
+</robot>
