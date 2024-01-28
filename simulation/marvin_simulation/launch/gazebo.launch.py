@@ -1,7 +1,7 @@
 import os
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
-from launch.actions import IncludeLaunchDescription
+from launch.actions import IncludeLaunchDescription, ExecuteProcess
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 
 
@@ -13,11 +13,15 @@ def generate_launch_description():
 
     # Specify the name of the package and path to xacro file within the package
     pkg_name = 'marvin_simulation'
-    file_subpath = 'urdf/marvin.xacro'
+    model_subpath = 'urdf/marvin.xacro'
+    world_subpath = 'worlds/course.world'
+    launch_dir = os.path.join(get_package_share_directory(pkg_name), 'launch')
 
+    world = os.path.join(get_package_share_directory(pkg_name), world_subpath)
+    print(world)
 
     # Use xacro to process the file
-    xacro_file = os.path.join(get_package_share_directory(pkg_name),file_subpath)
+    xacro_file = os.path.join(get_package_share_directory(pkg_name), model_subpath)
     robot_description_raw = xacro.process_file(xacro_file).toxml()
 
 
@@ -30,10 +34,25 @@ def generate_launch_description():
         'use_sim_time': True}] # add other parameters here if required
     )
 
-    gazebo = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource([os.path.join(
-            get_package_share_directory('gazebo_ros'), 'launch'), '/gazebo.launch.py']),
-        )
+    gazebo_server = ExecuteProcess(
+        cmd=[
+            'gzserver',
+            '--verbose',
+            '-s',
+            'libgazebo_ros_init.so',
+            '-s',
+            'libgazebo_ros_factory.so',
+            world,
+        ],
+        output='screen',
+        cwd=[launch_dir]
+    )
+
+    gazebo_client = ExecuteProcess(
+        cmd=['gzclient'],
+        output='screen',
+        cwd=[launch_dir]
+    )
 
     spawn_entity = Node(package='gazebo_ros', executable='spawn_entity.py',
                     arguments=['-topic', 'robot_description',
@@ -56,7 +75,8 @@ def generate_launch_description():
     
     # Run the node
     return LaunchDescription([
-        gazebo,
+        gazebo_server, 
+        gazebo_client,
         node_robot_state_publisher,
         spawn_entity,
         pointcloud_to_laserscan
