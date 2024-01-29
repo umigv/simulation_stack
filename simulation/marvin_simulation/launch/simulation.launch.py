@@ -1,35 +1,38 @@
-import os
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
-from launch.actions import ExecuteProcess, DeclareLaunchArgument
-from launch.substitutions import LaunchConfiguration
-
 from launch_ros.actions import Node
-import xacro
+from launch.actions import DeclareLaunchArgument, ExecuteProcess
+from launch.substitutions import Command, LaunchConfiguration
+import os
 
 def generate_launch_description():
     # Constants
     package_name = 'marvin_simulation'
     package_directory = get_package_share_directory(package_name)
-    launch_path = os.path.join(package_directory, 'launch')
+    cwd = os.path.join(package_directory, 'launch')
     rviz_config = os.path.join(package_directory, 'rviz/simulation.rviz')
-    model = xacro.process_file(os.path.join(package_directory, 'urdf', 'marvin.xacro')).toxml()
+    default_model = os.path.join(package_directory, 'urdf', 'marvin.xacro')
+    default_world = os.path.join(package_directory, 'worlds', 'course.world')
 
     # Arguments
     world_launch_arg = DeclareLaunchArgument(
         'world',
-        default_value=os.path.join(package_directory, 'worlds', 'course.world'),
+        default_value=default_world,
         description='Absolute path to world file'
     )
 
-    world = LaunchConfiguration('world')
+    model_launch_arg = DeclareLaunchArgument(
+        name='model', 
+        default_value=default_model,
+        description='Absolute path to robot urdf file'
+    )
 
     # Robot node
     robot_state_publisher_node = Node(
         package='robot_state_publisher',
         executable='robot_state_publisher',
         output='screen',
-        parameters=[{'robot_description': model,
+        parameters=[{'robot_description': Command(['xacro ', LaunchConfiguration('model')]),
                      'use_sim_time': True}]
     )
 
@@ -39,16 +42,15 @@ def generate_launch_description():
             'gzserver',
             '-s', 'libgazebo_ros_init.so',
             '-s', 'libgazebo_ros_factory.so',
-            world,
-        ],
+            LaunchConfiguration('world')],
         output='screen',
-        cwd=[launch_path]
+        cwd=[cwd]
     )
 
     gazebo_client = ExecuteProcess(
         cmd=['gzclient'],
         output='screen',
-        cwd=[launch_path]
+        cwd=[cwd]
     )
 
     spawn_robot = Node(package='gazebo_ros', 
@@ -59,17 +61,17 @@ def generate_launch_description():
     )
 
     # Pointcloud to laserscan node
-    pointcloud_to_laserscan = Node(package='pointcloud_to_laserscan', 
-                                   executable='pointcloud_to_laserscan_node', 
-                                   ros_arguments=[
-                                       '-p', 'target_frame:=base_footprint',
-                                       '-p', 'range_min:=0.9',
-                                       '-p', 'range_max:=100.0',
-                                       '-p', 'scan_time:=0.05',
-                                       '-p', 'angle_increment:=0.00335'],
-                                   remappings=[
-                                        ('/cloud_in', '/velodyne_points'),
-                                        ('/scan', '/laser_scan')]
+    pointcloud_to_laserscan_node = Node(package='pointcloud_to_laserscan', 
+                                        executable='pointcloud_to_laserscan_node', 
+                                        ros_arguments=[
+                                            '-p', 'target_frame:=base_footprint',
+                                            '-p', 'range_min:=0.9',
+                                            '-p', 'range_max:=100.0',
+                                            '-p', 'scan_time:=0.05',
+                                            '-p', 'angle_increment:=0.00335'],
+                                        remappings=[
+                                            ('/cloud_in', '/velodyne_points'),
+                                            ('/scan', '/laser_scan')]
     )
 
     #RViz node
@@ -84,10 +86,11 @@ def generate_launch_description():
     # Launch Description
     return LaunchDescription([
         world_launch_arg,
+        model_launch_arg,
         robot_state_publisher_node,
         gazebo_server, 
         gazebo_client,
         spawn_robot,
-        pointcloud_to_laserscan,
+        pointcloud_to_laserscan_node,
         rviz_node,
     ])
