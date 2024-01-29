@@ -1,5 +1,5 @@
 # Navigation Stack - Simulation
-This package allows you to simulate Marvin (UMARV's 2022-2023 robot) using RViz and Gazebo
+This package allows you to simulate Marvin (UMARV's 2022-2024 robot) using RViz and Gazebo
 
 ## URDF basics
 Unified Robotics Description Format (URDF) is an XML specification used to model robots. It is made up of ```links``` (bodies with kinematic and dynamic specifications) and ```joints``` (connection between links). You can imagine the model structure to be a [tree](https://en.wikipedia.org/wiki/Tree_(data_structure)) with links as nodes and joints as edges. The root, or fixed frame (in our case ```chassis```, specified in ```simulation_config.rviz```) is the core of the model. All other links are define relative to the fixed frame. You can read more about the URDF format [here](https://wiki.ros.org/urdf/XML) and [here](https://navigation.ros.org/setup_guides/urdf/setup_urdf.html#urdf-and-the-robot-state-publisher). I also recommend watching [this video](https://youtu.be/CwdbsvcpOHM?si=mOkKDYqQnHFhNE2T) as it is a good introduction to URDF.
@@ -16,46 +16,21 @@ Unified Robotics Description Format (URDF) is an XML specification used to model
 2. Open the file, uncomment line 16. This prevents errors when running Gazebo
 3. Connect to the docker container as usual
 
-## Quick Installation Guide (Recommended)
+## Installation Guide
 
-### Install Navigation Stack
+### Install Simulation Stack
 1. ```cd``` into ```ws/src```
-2. ```git clone -b simulation https://github.com/umigv/nav_stack.git```
-3. ```cd nav_stack```
+2. ```git clone https://github.com/umigv/simulation_stack.git```
+3. ```cd simulation_stack```
+4. ```./scripts/SetupSimulation.bash```
 
-### Run the setup script
-1. ```./scripts/SetupSimulation.bash```
-2. Follow the prompt
-
-## Manual Installation Guide 
-**All commands should be run in ```ws/src/nav_stack``` unless otherwise specified**
-
-### Install ROS2 Depedency 
-Run the following command anywhere on your computer:  
-```
-sudo apt update && sudo apt install ros-humble-rttest \
-ros-humble-rclcpp-action \
-ros-humble-gazebo-dev \
-ros-humble-gazebo-msgs \
-ros-humble-gazebo-plugins \
-ros-humble-gazebo-ros \
-ros-humble-gazebo-ros-pkgs \
-ros-humble-joint-state-publisher-gui \
-ros-humble-xacro \
-```
-
-### Install the required packages
-1. ```cd``` into ```ws/src```
-2. ```git clone -b simulation https://github.com/umigv/nav_stack.git```
-3. ```cd nav_stack```
-4. ```git submodule update --init --recursive simulation/velodyne_simulator```
-5. ```git submodule update --init --recursive simulation/pointcloud_to_laserscan```
 ## Testing the Project
 1. ```cd``` into ```ws```
 2. ```source /opt/ros/humble/setup.bash```
 3. ```colcon build --symlink-install```
 4. ```source install/setup.bash```
-5. ```ros2 launch marvin_simulation simulation.launch.py```, this should open up the robot model with Gazebo and RViz```
+5. Running ```ros2 launch marvin_simulation display.launch.py``` should show open RViz with the robot model
+6. Alternatively, running ```ros2 launch marvin_simulation simulation.launch.py``` should open up the robot model with Gazebo and RViz
 
 ## Sample Image
 ![image](https://github.com/umigv/nav_stack/assets/71594512/cde0a60f-b5a3-47b7-b05a-c7afba1f751d)
