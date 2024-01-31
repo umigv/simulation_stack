@@ -27,7 +27,7 @@ Unified Robotics Description Format (URDF) is an XML specification used to model
 ## Testing the Project
 1. ```cd``` into ```ws```
 2. ```source /opt/ros/humble/setup.bash```
-3. ```colcon build --symlink-install```
+3. ```colcon build```
 4. ```source install/setup.bash```
 5. Running ```ros2 launch marvin_simulation display.launch.py``` should show open RViz with the robot model
 6. Alternatively, running ```ros2 launch marvin_simulation simulation.launch.py``` should open up the robot model with Gazebo and RViz
