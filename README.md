@@ -52,4 +52,3 @@ This error is caused by [snap variables leaking into terminal variables](https:/
 
 ## Credits
 Jason Ning and Kari Naga on the sensors team, who created the original URDF files and the Gazebo World in the [marvin](https://github.com/umigv/marvin/tree/main/urdf) repository.  
-Ethan Hardy for testing the package and creating the installation script
