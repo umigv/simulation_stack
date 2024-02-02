@@ -10,7 +10,7 @@ def generate_launch_description():
     # Constants
     package_directory = get_package_share_directory('marvin_simulation')
     cwd = os.path.join(package_directory, 'launch')
-    rviz_config = os.path.join(package_directory, 'rviz/simulation.rviz')
+    rviz_config = os.path.join(package_directory, 'rviz', 'simulation.rviz')
     default_model = os.path.join(package_directory, 'urdf', 'marvin.xacro')
     default_world = os.path.join(package_directory, 'worlds', 'course.world')
     headless = LaunchConfiguration('headless')
