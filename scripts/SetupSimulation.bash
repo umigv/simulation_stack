@@ -12,7 +12,7 @@ git submodule update --init --recursive
 cd ../../
 
 source /opt/ros/humble/setup.bash
-colcon build --symlink-install
+colcon build
 source install/setup.bash
 
 echo "Build successful!"
