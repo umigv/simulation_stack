@@ -79,9 +79,7 @@ def generate_launch_description():
             '-p', 'range_max:=100.0',
             '-p', 'scan_time:=0.05',
             '-p', 'angle_increment:=0.00335'],
-        remappings=[
-            ('/cloud_in', '/velodyne_points'),
-            ('/scan', '/laser_scan')]
+        remappings=[('/cloud_in', '/velodyne_points')]
     )
 
     # RViz node
