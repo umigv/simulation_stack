@@ -55,7 +55,7 @@ def generate_launch_description():
     )
 
     gazebo_client = ExecuteProcess(
-        condition=UnlessCondition(headless),
+        #condition=UnlessCondition(headless),
         cmd=['gzclient'],
         output='screen',
         cwd=[cwd]
