@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 
-<robot xmlns:xacro="http://ros.org/wiki/xacro" name="camera">
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="depth_camera">
     <xacro:macro name="camera" params="mass *joint_origin">
         <link name="camera">
             <inertial>
