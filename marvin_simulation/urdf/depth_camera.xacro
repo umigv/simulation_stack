@@ -1,49 +1,45 @@
 <?xml version="1.0"?>
 
 <robot xmlns:xacro="http://ros.org/wiki/xacro" name="depth_camera">
-    <xacro:macro name="camera" params="mass *joint_origin">
-        <link name="camera">
-            <inertial>
-                <mass value="${camera_mass}"/>
-                <origin xyz="0 0 0" rpy="0 0 0"/>
-                <inertia
-                    ixx="1e-6" ixy="0.0" ixz="0.0"
-                    iyy="1e-6" iyz="0.0"
-                    izz="1e-6"
-                  />
-            </inertial>
+    <xacro:macro name="depth_camera" params="prefix mass length width height parent *joint_origin">
+        <xacro:include filename="$(find marvin_simulation)/urdf/inertia.xacro"/>
+
+        <link name="${prefix}_depth_camera">
+            <xacro:box_inertia mass="${mass}" length="${length}" width="${width}" height="${height}">
+                <origin xyz="0 0 ${height/2}" rpy="0 0 0" />
+            </xacro:box_inertia>
     
             <visual>
-                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <origin xyz="0 0 ${height/2}" rpy="0 0 0"/>
                 <geometry>
-                    <box size="0.05 0.05 0.03"/>
+                    <box size="${length} ${width} ${height}"/>
                 </geometry>
             </visual>
     
             <collision>
-                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <origin xyz="0 0 ${height/2}" rpy="0 0 0"/>
                 <geometry>
-                    <box size="0.05 0.05 0.03"/>
+                    <box size="${length} ${width} ${height}"/>
                 </geometry>
             </collision>
         </link>
     
-        <link name="camera_link_optical" />
-    
-        <joint name="sim_camera_joint" type="fixed">
+        <link name="${prefix}_depth_camera_optical_link" />
+        
+        <joint name="${prefix}_depth_camera_optical_joint" type="fixed">
+            <origin xyz="0 0 0" rpy="${-pi/2} 0 ${-pi/2}"/>
+            <parent link="${prefix}_depth_camera" />
+            <child link="${prefix}_depth_camera_optical_link" />
+        </joint>
+
+        <joint name="${prefix}_depth_camera_joint" type="fixed">
             <xacro:insert_block name="joint_origin" />
-            <parent link="base_link" />
-            <child link="camera" />
+            <parent link="${parent}" />
+            <child link="${prefix}_depth_camera" />
             <axis xyz="0 1 0" />
         </joint>
     
-        <joint name="camera_optical_joint" type="fixed">
-            <origin xyz="0 0 0" rpy="${-pi/2} 0 ${-pi/2}"/>
-            <parent link="camera" />
-            <child link="camera_link_optical" />
-        </joint>
-    
-        <gazebo reference="camera">
+        <gazebo reference="${prefix}_depth_camera">
             <material>Gazebo/Yellow</material>
         </gazebo>
     </xacro:macro>

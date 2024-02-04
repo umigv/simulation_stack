@@ -163,9 +163,9 @@
 
     <!-- Sim Camera -->
 	<xacro:include filename="$(find marvin_simulation)/urdf/depth_camera.xacro" />
-	<xacro:camera mass="${camera_mass}">
+	<xacro:depth_camera prefix="zed" mass="${camera_mass}" length = "${1.5*0.0254}" width="${6.75*0.0254}" height="${1*0.0254}" parent="base_link">
 		<origin xyz="${camera_x_offset} 0 ${camera_z_offset}" rpy="0 ${camera_angle} 0" />
-	</xacro:camera>
+	</xacro:depth_camera>
 
 
     <!-- Lidar -->
