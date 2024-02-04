@@ -1,7 +1,7 @@
-[submodule "simulation/velodyne_simulator"]
+[submodule "velodyne_simulator"]
 	path = velodyne_simulator
-	url = https://github.com/ToyotaResearchInstitute/velodyne_simulator.git
-[submodule "simulation/pointcloud_to_laserscan"]
+	url = https://github.com/umigv/velodyne_simulator.git
+[submodule "pointcloud_to_laserscan"]
 	path = pointcloud_to_laserscan
 	url = https://github.com/ros-perception/pointcloud_to_laserscan.git
 	branch = humble
