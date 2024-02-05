@@ -43,7 +43,10 @@
     <xacro:property name="lidar_height" value="${32.55*0.0254}"/>
 
     <!-- Camera Constants -->
-    <xacro:property name="camera_mass" value="0.1"/>
+    <xacro:property name="camera_mass" value="0.230"/>
+    <xacro:property name="camera_length" value="0.04310"/>
+    <xacro:property name="camera_width" value="0.17525"/>
+    <xacro:property name="camera_height" value="0.03025"/>
     <xacro:property name="camera_angle" value="${10 * 0.01745327777}"/>
     <xacro:property name="camera_x_offset" value="${(4+2.66916)*0.0254}"/> 
     <xacro:property name="camera_z_offset" value="${(31-1.80395)*0.0254}"/> 
@@ -162,10 +165,10 @@
 
 
     <!-- Sim Camera -->
-	<xacro:include filename="$(find marvin_simulation)/urdf/camera.xacro" />
-	<xacro:camera mass="${camera_mass}">
+	<xacro:include filename="$(find marvin_simulation)/urdf/depth_camera.xacro" />
+	<xacro:depth_camera prefix="zed" mass="${camera_mass}" length = "${camera_length}" width="${camera_width}" height="${camera_height}" parent="base_link">
 		<origin xyz="${camera_x_offset} 0 ${camera_z_offset}" rpy="0 ${camera_angle} 0" />
-	</xacro:camera>
+	</xacro:depth_camera>
 
 
     <!-- Lidar -->
@@ -241,7 +244,7 @@
 	</gazebo>
 
 
-    <!-- Motor, Camera and IMU Simulation -->
+    <!-- Motor and IMU Simulation -->
 	<xacro:include filename="$(find marvin_simulation)/urdf/marvin.gazebo" />
 </robot>
 
