@@ -10,6 +10,7 @@ def generate_launch_description():
     # Constants
     package_directory = get_package_share_directory('marvin_simulation')
     cwd = os.path.join(package_directory, 'launch')
+    model = os.path.join(package_directory, 'urdf', 'marvin.xacro')
     rviz_config = os.path.join(package_directory, 'rviz', 'simulation.rviz')
     default_world = os.path.join(package_directory, 'worlds', 'course.world')
 
@@ -31,7 +32,7 @@ def generate_launch_description():
         package='robot_state_publisher',
         executable='robot_state_publisher',
         output='screen',
-        parameters=[{'robot_description': Command(['xacro ', LaunchConfiguration('model')]),
+        parameters=[{'robot_description': Command(['xacro ', model]),
                      'use_sim_time': True}]
     )
 
