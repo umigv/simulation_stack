@@ -11,9 +11,7 @@ def generate_launch_description():
     package_directory = get_package_share_directory('marvin_simulation')
     cwd = os.path.join(package_directory, 'launch')
     rviz_config = os.path.join(package_directory, 'rviz', 'simulation.rviz')
-    default_model = os.path.join(package_directory, 'urdf', 'marvin.xacro')
     default_world = os.path.join(package_directory, 'worlds', 'course.world')
-    headless = LaunchConfiguration('headless')
 
     # Arguments
     world_launch_arg = DeclareLaunchArgument(
@@ -22,13 +20,7 @@ def generate_launch_description():
         description='Absolute path to world file'
     )
 
-    model_launch_arg = DeclareLaunchArgument(
-        name='model', 
-        default_value=default_model,
-        description='Absolute path to robot urdf file'
-    )
-
-    headless_arg = DeclareLaunchArgument(
+    headless_launch_arg = DeclareLaunchArgument(
         name='headless',
         default_value='False',
         description='Show RViz and Gazebo'
@@ -55,7 +47,6 @@ def generate_launch_description():
     )
 
     gazebo_client = ExecuteProcess(
-        #condition=UnlessCondition(headless),
         cmd=['gzclient'],
         output='screen',
         cwd=[cwd]
@@ -84,7 +75,7 @@ def generate_launch_description():
 
     # RViz node
     rviz_node = Node(
-        condition=UnlessCondition(headless),
+        condition=UnlessCondition(LaunchConfiguration('headless')),
         package='rviz2',
         executable='rviz2',
         name='rviz2',
@@ -95,8 +86,7 @@ def generate_launch_description():
     # Launch Description
     return LaunchDescription([
         world_launch_arg,
-        model_launch_arg,
-        headless_arg,
+        headless_launch_arg,
         robot_state_publisher_node,
         gazebo_server, 
         gazebo_client,
