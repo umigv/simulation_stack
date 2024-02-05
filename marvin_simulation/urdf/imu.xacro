@@ -50,7 +50,7 @@
 
 
         <!-- imu plugin -->
-        <gazebo reference="imu_link">
+        <gazebo reference="${prefix}_imu_link">
             <gravity>true</gravity>
 
             <sensor name="${prefix}_imu" type="imu">
@@ -60,14 +60,14 @@
                 <topic>__default_topic__</topic>
                 <pose>0 0 0 0 0 0</pose>
 
-                <plugin filename="libgazebo_ros_imu_sensor.so" name="imu_plugin">
+                <plugin name="${prefix}_imu_controller" filename="libgazebo_ros_imu_sensor.so">
                     <topicName>imu</topicName>
-                    <bodyName>imu_link</bodyName>
+                    <bodyName>${prefix}_imu_link</bodyName>
                     <updateRateHZ>100.0</updateRateHZ>
                     <gaussianNoise>0.0</gaussianNoise>
                     <xyzOffset>0 0 0</xyzOffset>
                     <rpyOffset>0 0 0</rpyOffset>
-                    <frameName>imu_link</frameName>
+                    <frameName>${prefix}_imu_link</frameName>
                     <initialOrientationAsReference>false</initialOrientationAsReference>
                 </plugin>
             </sensor>
