@@ -5,9 +5,8 @@ Panels:
     Property Tree Widget:
       Expanded:
         - /LaserScan1/Topic1
-        - /Image1/Topic1
       Splitter Ratio: 0.5
-    Tree Height: 854
+    Tree Height: 1254
 Visualization Manager:
   Class: ""
   Displays:
@@ -56,6 +55,15 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
+        camera:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        camera_link_optical:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
         caster:
           Alpha: 1
           Show Axes: false
@@ -90,19 +98,6 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
-        zed_depth_camera_base_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        zed_depth_camera_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        zed_depth_camera_optical_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
       Mass Properties:
         Inertia: false
         Mass: false
@@ -120,6 +115,10 @@ Visualization Manager:
           Value: true
         base_link:
           Value: true
+        camera:
+          Value: true
+        camera_link_optical:
+          Value: true
         caster:
           Value: true
         encoders:
@@ -136,12 +135,6 @@ Visualization Manager:
           Value: true
         velodyne_base_link:
           Value: true
-        zed_depth_camera_base_link:
-          Value: true
-        zed_depth_camera_link:
-          Value: true
-        zed_depth_camera_optical_link:
-          Value: true
       Marker Scale: 0.30000001192092896
       Name: TF
       Show Arrows: true
@@ -152,6 +145,9 @@ Visualization Manager:
           base_link:
             base_footprint:
               {}
+            camera:
+              camera_link_optical:
+                {}
             caster:
               {}
             encoders:
@@ -165,10 +161,6 @@ Visualization Manager:
             velodyne_base_link:
               velodyne:
                 {}
-            zed_depth_camera_base_link:
-              zed_depth_camera_link:
-                zed_depth_camera_optical_link:
-                  {}
       Update Interval: 0
       Value: true
     - Alpha: 1
@@ -204,20 +196,6 @@ Visualization Manager:
         Value: /scan
       Use Fixed Frame: true
       Use rainbow: true
-      Value: true
-    - Class: rviz_default_plugins/Image
-      Enabled: true
-      Max Value: 1
-      Median window: 5
-      Min Value: 0
-      Name: Image
-      Normalize Range: true
-      Topic:
-        Depth: 5
-        Durability Policy: Volatile
-        History Policy: Keep Last
-        Reliability Policy: Reliable
-        Value: /zed_depth_camera/depth/image_raw
       Value: true
   Enabled: true
   Global Options:
@@ -263,12 +241,10 @@ Visualization Manager:
 Window Geometry:
   Displays:
     collapsed: false
-  Height: 1359
+  Height: 1658
   Hide Left Dock: false
   Hide Right Dock: false
-  Image:
-    collapsed: false
-  QMainWindow State: 000000ff00000000fd0000000100000000000001f7000004f9fc0200000002fb000000100044006900730070006c006100790073010000003b0000041b000000c700fffffffb0000000a0049006d006100670065010000045c000000d80000002800ffffff00000b67000004f900000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
-  Width: 3428
+  QMainWindow State: 000000ff00000000fd0000000100000000000001f7000005defc0200000001fb000000100044006900730070006c006100790073010000006e000005de0000018200ffffff00000b5d000005de00000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  Width: 3424
   X: 0
-  Y: 0
+  Y: 54
