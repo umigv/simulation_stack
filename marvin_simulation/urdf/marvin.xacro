@@ -119,39 +119,12 @@
         <child link="base_footprint" />
     </joint>
 
+
     <!-- Caster -->
-    <link name="caster">
-        <visual name="caster_visual">
-            <geometry>
-                <sphere radius="${caster_radius}" />
-            </geometry>
-        </visual>
-
-        <collision name='caster_collision'>
-			<origin xyz="0 0 0" rpy=" 0 0 0"/>
-			<geometry>
-				<sphere radius="${caster_radius}"/>
-			</geometry>
-			<surface>
-				<friction>
-				<ode>
-					<mu>0.0</mu>
-					<mu2>0.0</mu2>
-				</ode>
-				</friction>
-			</surface>
-		</collision>
-
-        <xacro:sphere_inertia mass="${caster_mass}" radius="${caster_radius}">
-            <origin xyz="0 0 0" rpy="0 0 0" />
-        </xacro:sphere_inertia>
-    </link>
-
-    <joint name="caster_joint" type="fixed">
+    <xacro:include filename="$(find marvin_simulation)/urdf/caster.xacro"/>
+	<xacro:caster prefix="back" mass="${caster_mass}" radius="${caster_radius}">
         <origin xyz="${caster_x_offset} 0 ${caster_radius-chassis_z_offset}" rpy="0 0 0" />
-        <parent link="base_link" />
-        <child link="caster" />
-    </joint>
+	</xacro:caster>
 
 
     <!-- Wheels -->
@@ -233,10 +206,6 @@
 
 	<gazebo reference="chassis_caster_visual">
 		<material>Gazebo/Blue</material>
-	</gazebo>
-
-	<gazebo reference="caster_visual">
-		<material>Gazebo/Green</material>
 	</gazebo>
 
 	<gazebo reference="imu_visual">
