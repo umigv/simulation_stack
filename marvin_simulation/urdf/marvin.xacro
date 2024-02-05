@@ -1,128 +1,24 @@
 <?xml version='1.0'?>
 
 <robot name="marvin" xmlns:xacro="http://www.ros.org/wiki/xacro"> 
-	<!-- Chassis Constants -->
-    <xacro:property name="chassis_length" value="${45.5*0.0254}" />
-    <xacro:property name="chassis_width" value="${24*0.0254}" />
-    <xacro:property name="chassis_height" value="${22*0.0254}" />
-    <xacro:property name="chassis_z_offset" value="${4.375*0.0254}" />
+    <xacro:include filename="$(find marvin_simulation)/urdf/constants.xacro"/>
 
-    <xacro:property name="chassis_tower_length" value="${8*0.0254}" />
-    <xacro:property name="chassis_tower_height" value="${31*0.0254}" />
-
-    <xacro:property name="chassis_payload_length" value="${14.25*0.0254}" />
-    <xacro:property name="chassis_payload_height" value="${8*0.0254}" />
-
-    <xacro:property name="chassis_electrical_length" value="${15.25*0.0254}" />
-    <xacro:property name="chassis_electrical_height" value="${22*0.0254}" />
-
-    <xacro:property name="chassis_caster_length" value="${8*0.0254}" />
-    <xacro:property name="chassis_caster_height" value="${2.25*0.0254}" />
-    <xacro:property name="chassis_caster_z_offset" value="${2*0.0254}" />
-
-    <!-- Chassis Inertial Constants -->
-    <xacro:property name="chassis_mass" value="29.9371" />
-    <xacro:property name="com_x" value="${-4.0*0.0254}" />
-    <xacro:property name="com_y" value="0.0" />
-    <xacro:property name="com_z" value="${6.1875*0.0254-chassis_z_offset}" />
-
-	<!-- Caster Constants -->
-    <xacro:property name="caster_x_offset" value="${-24.625*0.0254}" />
-    <xacro:property name="caster_radius" value="${3.5*0.0254}" />
-    <xacro:property name="caster_mass" value="0.1" />
-
-	<!-- Wheel Constants -->
-    <xacro:property name="wheel_radius" value="${6.1875*0.0254}" />
-    <xacro:property name="wheel_width" value="${4*0.0254}" />
-    <xacro:property name="wheel_mass" value="5" />
-    <xacro:property name="track_width" value="${31*0.0254}" />
-
-    <!-- Lidar Constants -->
-    <xacro:property name="lidar_height" value="${32.55*0.0254}"/>
-
-    <!-- Camera Constants -->
-    <xacro:property name="camera_mass" value="0.230"/>
-    <xacro:property name="camera_length" value="0.04310"/>
-    <xacro:property name="camera_width" value="0.17525"/>
-    <xacro:property name="camera_height" value="0.03025"/>
-    <xacro:property name="camera_angle" value="${10 * 0.01745327777}"/>
-    <xacro:property name="camera_x_offset" value="${(4+2.66916)*0.0254}"/> 
-    <xacro:property name="camera_z_offset" value="${(31-1.80395)*0.0254}"/> 
-
-    <!-- IMU Constants -->
-    <xacro:property name="imu_mass" value="0.025"/>
-    <xacro:property name="imu_length" value="0.05"/>
-    <xacro:property name="imu_width" value="0.03"/>
-    <xacro:property name="imu_height" value="0.01"/>
-
-	<xacro:include filename="$(find marvin_simulation)/urdf/inertia.xacro" />
-
-
-	<!-- Chassis -->
-	<link name="base_link">
-        <xacro:box_inertia mass="${chassis_mass}" length="${chassis_length}" width="${chassis_width}" height="${chassis_height}">
-            <origin xyz="${com_x} ${com_y} ${com_z}" rpy="0 0 0" />
-		</xacro:box_inertia>
-
-		<visual> <!-- Chassis Tower -->
-			<origin xyz="0 0 ${chassis_tower_height / 2}" rpy="0 0 0" />
-			<geometry>
-				<box size="${chassis_tower_length} ${chassis_width} ${chassis_tower_height}" />
-			</geometry>
-		</visual>
-
-        <visual> <!-- Chassis Payload -->
-            <origin xyz="${chassis_tower_length / 2 + chassis_payload_length / 2} 0 ${chassis_payload_height / 2}" rpy="0 0 0" />
-            <geometry>
-                <box size="${chassis_payload_length} ${chassis_width} ${chassis_payload_height}" />
-            </geometry>
-        </visual>
-
-        <visual> <!-- Chassis Electrical -->
-            <origin xyz="${-chassis_tower_length / 2 - chassis_electrical_length / 2} 0 ${chassis_electrical_height / 2}" rpy="0 0 0" />
-            <geometry>
-                <box size="${chassis_electrical_length} ${chassis_width} ${chassis_electrical_height}" />
-            </geometry>
-        </visual>
-
-        <visual> <!-- Chassis Caster -->
-            <origin xyz="${-chassis_tower_length / 2 - chassis_electrical_length - chassis_caster_length / 2} 
-                         0 
-                         ${chassis_caster_height / 2 + chassis_caster_z_offset}" 
-                         rpy="0 0 0" />
-            <geometry>
-                <box size="${chassis_caster_length} ${chassis_width} ${chassis_caster_height}" />
-            </geometry>
-        </visual>
-
-		<collision>
-			<origin xyz="${chassis_tower_length / 2 + chassis_payload_length - chassis_length / 2} 
-                         0 
-                         ${chassis_tower_height / 2}" 
-                    rpy="0 0 0" />
-			<geometry>
-				<box size="${chassis_length} ${chassis_width} ${chassis_tower_height}" />
-			</geometry>
-		</collision>
-	</link>
-
-    <gazebo reference="base_link">
-        <material>Gazebo/Blue</material>
-    </gazebo>
+	<!-- Base_link -->
+    <link name="base_link" />
 
 
     <!-- Footprint -->
-    <link name="base_footprint">
-        <xacro:box_inertia mass="0" length="0" width="0" height="0">
-            <origin xyz="0 0 0" rpy="0 0 0" />
-        </xacro:box_inertia>
-    </link>
+    <link name="base_footprint" />  
 
     <joint name="base_joint" type="fixed">
         <origin xyz="0 0 ${-chassis_z_offset}" rpy="0 0 0" />
         <parent link="base_link" />
         <child link="base_footprint" />
     </joint>
+
+
+    <!-- Chassis -->
+    <xacro:include filename="$(find marvin_simulation)/urdf/chassis.xacro"/>
 
 
     <!-- Caster -->
@@ -174,31 +70,6 @@
 	</joint>
 
 
-    <!-- Drivetrain Simulation -->
-	<gazebo>
-		<plugin name="differential_drive_controller" filename="libgazebo_ros_diff_drive.so">
-			<update_rate>100.0</update_rate>
-			<robot_base_frame>base_link</robot_base_frame>
-			<command_topic>cmd_vel</command_topic>
-
-			<left_joint>left_wheel_joint</left_joint>
-			<right_joint>right_wheel_joint</right_joint>
-			<wheel_separation>${track_width}</wheel_separation>
-			<wheel_diameter>${2 * wheel_radius}</wheel_diameter>
-			<publish_tf>true</publish_tf>
-			<publish_wheel_tf>true</publish_wheel_tf>
-
-			<max_wheel_acceleration>1.8</max_wheel_acceleration>
-			<max_wheel_torque>30</max_wheel_torque>
-
-			<odometrySource>encoder</odometrySource>
-			<odometry_topic>odom</odometry_topic>
-			<odometry_frame>odom</odometry_frame>
-			<publish_odom>true</publish_odom>
-			<publish_odom_tf>true</publish_odom_tf>
-
-			<legacy_mode>false</legacy_mode>
-			<ros_debug_level>na</ros_debug_level>
-		</plugin>
-	</gazebo>
+    <!-- Gazebo plugins -->
+    <xacro:include filename="$(find marvin_simulation)/urdf/plugins.xacro"/>
 </robot>
