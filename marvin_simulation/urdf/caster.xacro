@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="caster">
+    <xacro:macro name="caster" params="prefix mass radius parent:=base_link *joint_origin">
+        <xacro:include filename="$(find marvin_simulation)/urdf/inertia.xacro"/>
+
+        <!-- Caster link -->
+        <link name="${prefix}_caster">
+            <xacro:sphere_inertia mass="${mass}" radius="${radius}">
+                <origin xyz="0 0 0" rpy="0 0 0" />
+            </xacro:sphere_inertia>
+
+            <visual>
+                <geometry>
+                    <sphere radius="${radius}" />
+                </geometry>
+            </visual>
+
+            <collision>
+                <origin xyz="0 0 0" rpy=" 0 0 0"/>
+
+                <geometry>
+                    <sphere radius="${radius}"/>
+                </geometry>
+
+                <surface>
+                    <friction>
+                        <ode>
+                            <mu>0.0</mu>
+                            <mu2>0.0</mu2>
+                        </ode>
+                    </friction>
+                </surface>
+            </collision>
+        </link>
+
+        <joint name="caster_joint" type="fixed">
+            <xacro:insert_block name="joint_origin" />
+            <parent link="${parent}" />
+            <child link="${prefix}_caster" />
+        </joint>
+
+
+        <!-- Caster color -->
+        <gazebo reference="caster_visual">
+		    <material>Gazebo/Green</material>
+	    </gazebo>
+    </xacro:macro>
+</robot>
