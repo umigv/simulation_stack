@@ -5,7 +5,7 @@
         <xacro:include filename="$(find marvin_simulation)/urdf/inertia.xacro"/>
 
         <!-- Caster link -->
-        <link name="${prefix}_caster">
+        <link name="${prefix}_caster_link">
             <xacro:sphere_inertia mass="${mass}" radius="${radius}">
                 <origin xyz="0 0 0" rpy="0 0 0" />
             </xacro:sphere_inertia>
@@ -34,15 +34,15 @@
             </collision>
         </link>
 
-        <joint name="caster_joint" type="fixed">
+        <joint name="${prefix}_caster_joint" type="fixed">
             <xacro:insert_block name="joint_origin" />
             <parent link="${parent}" />
-            <child link="${prefix}_caster" />
+            <child link="${prefix}_caster_link" />
         </joint>
 
 
         <!-- Caster color -->
-        <gazebo reference="caster_visual">
+        <gazebo reference="${prefix}_caster_link">
 		    <material>Gazebo/Green</material>
 	    </gazebo>
     </xacro:macro>
