@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 
 <robot xmlns:xacro="http://ros.org/wiki/xacro" name="wheel">
-    <xacro:macro name="wheel" params="prefix mass radius width parent:=base_link *joint_origin">
+    <xacro:macro name="wheel" params="name mass radius width parent:=base_link *joint_origin">
         <xacro:include filename="$(find marvin_simulation)/urdf/inertia.xacro"/>
 
         <!-- Wheel link -->
-        <link name="${prefix}_wheel_link">
+        <link name="${name}_link">
             <xacro:cylinder_inertia mass="${mass}" radius="${radius}" height="${width}">
                 <origin xyz="0 0 0" rpy="0 0 0" />
             </xacro:cylinder_inertia>
@@ -26,10 +26,10 @@
             </collision>
         </link>
 
-        <joint type="continuous" name="${prefix}_wheel_joint">
+        <joint type="continuous" name="${name}_joint">
             <xacro:insert_block name="joint_origin" />
             <parent link="base_link" />
-            <child link="${prefix}_wheel_link" />
+            <child link="${name}_link" />
             <axis xyz="0 1 0" rpy="0 0 0" />
             <limit effort="1000" velocity="1000"/>
             <dynamics damping="0.0001"/>
@@ -37,7 +37,7 @@
 
 
         <!-- Wheel color & physics-->
-        <gazebo reference="${prefix}_wheel_link">
+        <gazebo reference="${name}_link">
             <material>Gazebo/Green</material>
             <mu1 value="1.0"/>
             <mu2 value="1.0"/>

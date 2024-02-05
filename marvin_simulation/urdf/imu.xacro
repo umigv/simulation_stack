@@ -1,22 +1,22 @@
 <?xml version="1.0"?>
 
 <robot xmlns:xacro="http://ros.org/wiki/xacro" name="caster">
-    <xacro:macro name="imu" params="prefix mass length width height parent:=base_link *joint_origin">
+    <xacro:macro name="imu" params="name mass length width height parent:=base_link *joint_origin">
         <xacro:include filename="$(find marvin_simulation)/urdf/inertia.xacro"/>
 
         <!-- imu base link -->
-        <link name="${prefix}_imu_base_link" />
+        <link name="${name}_base_link" />
 
-        <joint name="${prefix}_imu_base_joint" type="fixed">
+        <joint name="${name}_base_joint" type="fixed">
             <xacro:insert_block name="joint_origin" />
             <parent link="${parent}" />
-            <child link="${prefix}_imu_base_link" />
+            <child link="${name}_base_link" />
             <axis xyz="0 1 0" />
         </joint>
 
 
         <!-- imu link -->
-        <link name="${prefix}_imu_link">
+        <link name="${name}_link">
 		    <xacro:box_inertia mass="${mass}" length="${length}" width="${width}" height="${height}">
                 <origin xyz="0 0 0" rpy="0 0 0" />
             </xacro:box_inertia>
@@ -36,38 +36,38 @@
             </collision>
         </link>
 
-        <joint name="${prefix}_imu_joint" type="fixed">
+        <joint name="${name}_joint" type="fixed">
             <origin xyz="0 0 ${height/2}" rpy="0 0 0"/>
-            <parent link="${prefix}_imu_base_link" />
-            <child link="${prefix}_imu_link" />
+            <parent link="${name}_base_link" />
+            <child link="${name}_link" />
         </joint>
 
 
         <!-- imu color -->    
-        <gazebo reference="${prefix}_imu_link">
+        <gazebo reference="${name}_link">
             <material>Gazebo/Purple</material>
         </gazebo>
 
 
         <!-- imu plugin -->
-        <gazebo reference="${prefix}_imu_link">
+        <gazebo reference="${name}_link">
             <gravity>true</gravity>
 
-            <sensor name="${prefix}_imu" type="imu">
+            <sensor name="${name}" type="imu">
                 <always_on>true</always_on>
                 <update_rate>100.0</update_rate>
                 <visualize>true</visualize>
                 <topic>__default_topic__</topic>
                 <pose>0 0 0 0 0 0</pose>
 
-                <plugin name="${prefix}_imu_controller" filename="libgazebo_ros_imu_sensor.so">
+                <plugin name="${name}_controller" filename="libgazebo_ros_sensor.so">
                     <topicName>imu</topicName>
-                    <bodyName>${prefix}_imu_link</bodyName>
+                    <bodyName>${name}_link</bodyName>
                     <updateRateHZ>100.0</updateRateHZ>
                     <gaussianNoise>0.0</gaussianNoise>
                     <xyzOffset>0 0 0</xyzOffset>
                     <rpyOffset>0 0 0</rpyOffset>
-                    <frameName>${prefix}_imu_link</frameName>
+                    <frameName>${name}_link</frameName>
                     <initialOrientationAsReference>false</initialOrientationAsReference>
                 </plugin>
             </sensor>
