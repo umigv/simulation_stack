@@ -2,9 +2,10 @@
 
 <robot xmlns:xacro="http://ros.org/wiki/xacro" name="caster">
     <xacro:macro name="imu" params="name mass length width height parent:=base_link *joint_origin">
+        <!-- Includes-->
         <xacro:include filename="$(find marvin_simulation)/urdf/inertia.xacro"/>
 
-        <!-- imu base link -->
+        <!-- Imu base link -->
         <link name="${name}_base_link" />
 
         <joint name="${name}_base_joint" type="fixed">
@@ -15,7 +16,7 @@
         </joint>
 
 
-        <!-- imu link -->
+        <!-- Imu link -->
         <link name="${name}_link">
 		    <xacro:box_inertia mass="${mass}" length="${length}" width="${width}" height="${height}">
                 <origin xyz="0 0 0" rpy="0 0 0" />
@@ -43,13 +44,13 @@
         </joint>
 
 
-        <!-- imu color -->    
+        <!-- Imu color -->    
         <gazebo reference="${name}_link">
             <material>Gazebo/Purple</material>
         </gazebo>
 
 
-        <!-- imu plugin -->
+        <!-- Imu plugin -->
         <gazebo reference="${name}_link">
             <gravity>true</gravity>
 

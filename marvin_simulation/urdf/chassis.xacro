@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 
 <robot xmlns:xacro="http://ros.org/wiki/xacro" name="chassis">
+    <!-- Includes-->
     <xacro:include filename="$(find marvin_simulation)/urdf/inertia.xacro"/>
     <xacro:include filename="$(find marvin_simulation)/urdf/constants.xacro"/>
 

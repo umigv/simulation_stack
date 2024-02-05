@@ -2,6 +2,7 @@
 
 <robot xmlns:xacro="http://ros.org/wiki/xacro" name="depth_camera">
     <xacro:macro name="depth_camera" params="name mass length width height parent:=base_link *joint_origin">
+        <!-- Includes-->
         <xacro:include filename="$(find marvin_simulation)/urdf/inertia.xacro"/>
 
         <!-- Depth camera base link -->

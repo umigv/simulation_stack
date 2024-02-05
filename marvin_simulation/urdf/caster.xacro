@@ -2,6 +2,7 @@
 
 <robot xmlns:xacro="http://ros.org/wiki/xacro" name="caster">
     <xacro:macro name="caster" params="name mass radius parent:=base_link *joint_origin">
+        <!-- Includes-->
         <xacro:include filename="$(find marvin_simulation)/urdf/inertia.xacro"/>
 
         <!-- Caster link -->
@@ -18,11 +19,9 @@
 
             <collision>
                 <origin xyz="0 0 0" rpy=" 0 0 0"/>
-
                 <geometry>
                     <sphere radius="${radius}"/>
                 </geometry>
-
                 <surface>
                     <friction>
                         <ode>
