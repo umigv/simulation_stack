@@ -61,7 +61,7 @@
                 <topic>__default_topic__</topic>
                 <pose>0 0 0 0 0 0</pose>
 
-                <plugin name="${name}_controller" filename="libgazebo_ros_sensor.so">
+                <plugin name="${name}_controller" filename="libgazebo_ros_imu_sensor.so">
                     <topicName>imu</topicName>
                     <bodyName>${name}_link</bodyName>
                     <updateRateHZ>100.0</updateRateHZ>
