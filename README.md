@@ -22,7 +22,7 @@ Unified Robotics Description Format (URDF) is an XML specification used to model
 1. ```cd``` into ```ws/src```
 2. ```git clone https://github.com/umigv/simulation_stack.git```
 3. ```cd simulation_stack```
-4. ```./scripts/SetupSimulation.bash```
+4. ```./scripts/setup.bash```
 
 ## Testing the Project
 1. ```cd``` into ```ws```
