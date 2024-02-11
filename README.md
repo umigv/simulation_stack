@@ -75,6 +75,8 @@ Since multiple subteams may use this stack as a dependency, **do not include thi
 ![image](https://github.com/umigv/simulation_stack/assets/71594512/d06b174b-d1e1-4ed9-87ef-9c0c3b0abce3)
 ![image](https://github.com/umigv/simulation_stack/assets/71594512/9130685b-c081-4591-942f-6b38e1be852f)
 
+## Learning more
+Visit the [wiki](https://github.com/umigv/simulation_stack/wiki) to learn about how to set up robot models for simulation
 
 ## Possible Issues
 ### symbol lookup error: ... undefined symbol: __libc_pthread_init, version GLIBC_PRIVATE
