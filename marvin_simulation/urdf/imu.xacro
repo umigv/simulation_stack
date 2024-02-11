@@ -2,7 +2,7 @@
 
 <robot xmlns:xacro="http://ros.org/wiki/xacro" name="caster">
     <xacro:macro name="imu" params="name mass length width height parent:=base_link *joint_origin">
-        <!-- Includes-->
+        <!-- Includes -->
         <xacro:include filename="$(find marvin_simulation)/urdf/inertia.xacro"/>
 
         <!-- Imu base link -->
