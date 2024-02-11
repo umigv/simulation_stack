@@ -1,6 +1,12 @@
 <?xml version="1.0"?>
 
-<robot xmlns:xacro="http://ros.org/wiki/xacro" name="wheel">
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="inertia">
+    <!-- Brief: Inertial property of a constant density box -->
+    <!-- Param mass: mass of the link -->
+    <!-- Param length: length of the link -->
+    <!-- Param width: width of the link -->
+    <!-- Param height: height of the object -->
+    <!-- Param origin: location of the inertia relative to the link's origin -->
     <xacro:macro name="box_inertia" params="mass length width height *origin">
             <inertial>
             <xacro:insert_block name="origin" />      
@@ -11,6 +17,11 @@
             </inertial>
     </xacro:macro>
 
+    <!-- Brief: Inertial property of a constant density cylinder -->
+    <!-- Param mass: mass of the link -->
+    <!-- Param radius: radius of the link -->
+    <!-- Param height: height of the link -->
+    <!-- Param origin: location of the inertia relative to the link's origin -->
     <xacro:macro name="cylinder_inertia" params="mass radius height *origin">
         <inertial>
             <xacro:insert_block name="origin" />  
@@ -21,6 +32,10 @@
         </inertial>
     </xacro:macro>
 
+    <!-- Brief: Inertial property of a constant density sphere -->
+    <!-- Param mass: mass of the link -->
+    <!-- Param radius: radius of the link -->
+    <!-- Param origin: location of the inertia relative to the link's origin -->
     <xacro:macro name="sphere_inertia" params="mass radius *origin">
         <inertial>
             <xacro:insert_block name="origin" />

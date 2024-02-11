@@ -1,5 +1,15 @@
 <?xml version="1.0"?>
 
+<!-- Brief: Powered robot wheel -->
+<!-- Shape, Collision, Inertia: Cylinder with relevant collision and constant inertia -->
+<!-- Mounting Location: Center of cylinder -->
+<!-- Joint Type: continuous -->
+<!-- Param name: the name of the wheel -->
+<!-- Param mass: mass of the wheel -->
+<!-- Param radius: radius of the wheel -->
+<!-- Param width: width of the wheel -->
+<!-- Param parent: name of the parent link, defaulted to base_link -->
+<!-- Param joint_origin: location of the wheel relative to parent link -->
 <robot xmlns:xacro="http://ros.org/wiki/xacro" name="wheel">
     <xacro:macro name="wheel" params="name mass radius width parent:=base_link *joint_origin">
         <!-- Includes -->

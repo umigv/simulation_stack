@@ -1,5 +1,17 @@
 <?xml version="1.0"?>
 
+<!-- Brief: Depth camera with property mimicking to the ZED 2i camera -->
+<!-- Shape, Collision, Inertia: Box with relevant collision and constant inertia -->
+<!-- Mounting Location: Bottom center of the camera -->
+<!-- Joint Type: fixed -->
+<!-- Plugin: libgazebo_ros_camera.so (depth camera) -->
+<!-- Param name: the name of the depth camera. All published topics will start with /{name} -->
+<!-- Param mass: mass of the depth camera -->
+<!-- Param length: length of the depth camera -->
+<!-- Param width: width of the depth camera -->
+<!-- Param height: height of the depth camera -->
+<!-- Param parent: name of the parent link, defaulted to base_link -->
+<!-- Param joint_origin: location of the depth camera relative to parent link -->
 <robot xmlns:xacro="http://ros.org/wiki/xacro" name="depth_camera">
     <xacro:macro name="depth_camera" params="name mass length width height parent:=base_link *joint_origin">
         <!-- Includes -->

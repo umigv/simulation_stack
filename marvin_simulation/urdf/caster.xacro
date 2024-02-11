@@ -1,5 +1,14 @@
 <?xml version="1.0"?>
 
+<!-- Brief: A caster wheel with zero friction -->
+<!-- Shape, Collision, Inertia: Sphere with relevant collision and constant inertia -->
+<!-- Mounting Location: center of the sphere -->
+<!-- Joint Type: fixed -->
+<!-- Param name: the name of the caster -->
+<!-- Param mass: mass of the caster -->
+<!-- Param radius: radius of the caster -->
+<!-- Param parent: name of the parent link, defaulted to base_link -->
+<!-- Param joint_origin: location of the caster relative to parent link -->
 <robot xmlns:xacro="http://ros.org/wiki/xacro" name="caster">
     <xacro:macro name="caster" params="name mass radius parent:=base_link *joint_origin">
         <!-- Includes -->
