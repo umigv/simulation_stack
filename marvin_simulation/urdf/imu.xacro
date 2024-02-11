@@ -1,5 +1,17 @@
 <?xml version="1.0"?>
 
+<!-- Brief: Standard IMU -->
+<!-- Shape, Collision, Inertia: Box with relevant collision and constant inertia -->
+<!-- Mounting Location: Bottom center of the IMU -->
+<!-- Joint Type: fixed -->
+<!-- Plugin: libgazebo_ros_imu_sensor.so -->
+<!-- Param name: the name of the IMU. Published topic is /{name}_controller/out -->
+<!-- Param mass: mass of the IMU -->
+<!-- Param length: length of the IMU -->
+<!-- Param width: width of the IMU -->
+<!-- Param height: height of the IMU -->
+<!-- Param parent: name of the parent link, defaulted to base_link -->
+<!-- Param joint_origin: location of the IMU relative to parent link -->
 <robot xmlns:xacro="http://ros.org/wiki/xacro" name="caster">
     <xacro:macro name="imu" params="name mass length width height parent:=base_link *joint_origin">
         <!-- Includes -->
