@@ -12,7 +12,7 @@ def generate_launch_description():
     cwd = os.path.join(package_directory, 'launch')
     model = os.path.join(package_directory, 'urdf', 'marvin.xacro')
     rviz_config = os.path.join(package_directory, 'rviz', 'simulation.rviz')
-    default_world = os.path.join(package_directory, 'worlds', 'course.world')
+    default_world = os.path.join(package_directory, 'worlds', 'empty.world')
 
     # Arguments
     world_launch_arg = DeclareLaunchArgument(
