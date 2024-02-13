@@ -101,4 +101,4 @@ This error is caused by [snap variables leaking into terminal variables](https:/
 ## Credits
 Jason Ning and Kari Naga on the sensors team, who created the original URDF files and the Gazebo World in the [marvin](https://github.com/umigv/marvin/tree/main/urdf) repository.  
 
-[UTRA ART](https://github.com/UTRA-ART) for their [full IVGC course world](https://github.com/UTRA-ART/Caffeine/tree/master/worlds/)
+[UTRA ART](https://github.com/UTRA-ART) for their [full IVGC course world](https://github.com/UTRA-ART/Caffeine/tree/master/worlds/). Any file or folder containing IGVC is under the original [Apache 2.0 license](https://github.com/umigv/simulation_stack/blob/igvc_course/marvin_simulation/world/LICENSE)
