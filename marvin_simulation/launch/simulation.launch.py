@@ -12,13 +12,13 @@ def generate_launch_description():
     cwd = os.path.join(package_directory, 'launch')
     model = os.path.join(package_directory, 'urdf', 'marvin.xacro')
     rviz_config = os.path.join(package_directory, 'rviz', 'simulation.rviz')
-    default_world = os.path.join(package_directory, 'worlds', 'empty.world')
+    default_world_name = 'empty'
 
     # Arguments
     world_launch_arg = DeclareLaunchArgument(
         name='world',
-        default_value=default_world,
-        description='Absolute path to world file'
+        default_value=default_world_name,
+        description='Name of world file in worlds directory'
     )
 
     headless_launch_arg = DeclareLaunchArgument(
@@ -42,7 +42,7 @@ def generate_launch_description():
             'gzserver',
             '-s', 'libgazebo_ros_init.so',
             '-s', 'libgazebo_ros_factory.so',
-            LaunchConfiguration('world')],
+            [package_directory, '/worlds/', LaunchConfiguration('world'), '.world']],
         output='screen',
         cwd=[cwd]
     )
@@ -93,5 +93,5 @@ def generate_launch_description():
         gazebo_client,
         spawn_robot,
         pointcloud_to_laserscan_node,
-        rviz_node,
+        rviz_node
     ])
