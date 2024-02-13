@@ -18,7 +18,7 @@ def generate_launch_description():
     world_launch_arg = DeclareLaunchArgument(
         name='world',
         default_value=default_world_name,
-        description='Name of world file in worlds directory'
+        description='Name of world file in the world directory'
     )
 
     headless_launch_arg = DeclareLaunchArgument(
@@ -42,7 +42,7 @@ def generate_launch_description():
             'gzserver',
             '-s', 'libgazebo_ros_init.so',
             '-s', 'libgazebo_ros_factory.so',
-            [package_directory, '/worlds/', LaunchConfiguration('world'), '.world']],
+            [package_directory, '/world/', LaunchConfiguration('world'), '.world']],
         output='screen',
         cwd=[cwd]
     )
