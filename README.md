@@ -68,6 +68,14 @@ Running ```ros2 launch marvin_simulation simulation.launch.py``` will spawn the 
 ```headless``` (default: ```False```) - whether to enable RViz. If you have other code that runs their own instance of RViz (ex. Nav2), you should set headless to True  
 ```world``` (default: ```empty```) - Name of the Gazebo world file in the world directory
 
+### Worlds
+```empty``` - empty worlds  
+```basic_obstacles``` - small world with basic obstacles like traffic cones and shelves  
+```igvc``` - standard IGVC world with lane lines and ramps  
+```igvc_flat``` - flat IGVC world with no ramps  
+```igvc_wall``` - standard IGVC world with walls representing lane lines  
+```igvc_flat_wall``` - flat IGVC world with walls and no ramps  
+
 ### Simulation Stack as a Subpackage
 Since multiple subteams may use this stack as a dependency, **do not include this stack directly in another subteam stack either as a package or git submodule**. Having multiple instances in the same package will result in conflicts. Instead, develop with simulation without adding simulation to your repostitory, and include this project as a submodule in the main stack.
 
