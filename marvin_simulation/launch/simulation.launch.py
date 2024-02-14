@@ -70,7 +70,9 @@ def generate_launch_description():
             '-p', 'range_min:=0.9',
             '-p', 'range_max:=100.0',
             '-p', 'scan_time:=0.05',
-            '-p', 'angle_increment:=0.00335'],
+            '-p', 'angle_increment:=0.00335',
+            '-p', 'min_height:=0.01',
+            ],
         remappings=[('/cloud_in', '/velodyne_points')]
     )
 
