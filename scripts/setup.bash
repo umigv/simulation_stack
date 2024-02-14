@@ -16,6 +16,6 @@ colcon build
 source install/setup.bash)
 
 # Install IVGC World Models
-bash marvin_simulation/worlds/ivgc_models/install_models.sh
+bash marvin_simulation/world/ivgc_models/install_models.sh
 
 echo "Setup successful!"
