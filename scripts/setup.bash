@@ -9,10 +9,13 @@ sudo apt-get install ros-humble-rttest ros-humble-rclcpp-action ros-humble-gazeb
 git submodule update --init --recursive 
 
 # Build
-cd ../../
+(cd ../../
 
 source /opt/ros/humble/setup.bash
 colcon build
-source install/setup.bash
+source install/setup.bash)
 
-echo "Build successful!"
+# Install IVGC World Models
+bash marvin_simulation/world/ivgc_models/install_models.sh
+
+echo "Setup successful!"
