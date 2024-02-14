@@ -31,7 +31,7 @@ The simulation is fairly computation intensive so a GPU is recommended. Note tha
 ### Building
 1. ```cd``` into ```ws```
 2. ```source /opt/ros/humble/setup.bash```
-3. ```colcon build```
+3. ```colcon build --symlink-install```
 4. ```source install/setup.bash```
 
 ### Launching
