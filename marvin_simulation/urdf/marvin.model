@@ -1,0 +1,466 @@
+<sdf version='1.7'>
+  <model name='marvin'>
+    <link name='base_link'>
+      <inertial>
+        <pose>-0.098675 0 0.073516 0 -0 0</pose>
+        <mass>31.1321</mass>
+        <inertia>
+          <ixx>2.36782</ixx>
+          <ixy>0</ixy>
+          <ixz>-0.112967</ixz>
+          <iyy>4.8263</iyy>
+          <iyz>0</iyz>
+          <izz>4.31525</izz>
+        </inertia>
+      </inertial>
+      <collision name='base_link_fixed_joint_lump__caster_link_collision'>
+        <pose>-0.625475 0 -0.022225 0 -0 0</pose>
+        <geometry>
+          <sphere>
+            <radius>0.0889</radius>
+          </sphere>
+        </geometry>
+        <surface>
+          <contact>
+            <ode/>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+      <collision name='base_link_fixed_joint_lump__chassis_link_collision_1'>
+        <pose>-0.1143 0 0.3937 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>1.1557 0.6096 0.7874</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <ode/>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+      <collision name='base_link_fixed_joint_lump__imu_link_collision_2'>
+        <pose>-0.295275 0 0.5638 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.05 0.03 0.01</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <ode/>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+      <collision name='base_link_fixed_joint_lump__velodyne_base_link_collision_3'>
+        <pose>0 0 0.86262 0 -0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.0717</length>
+            <radius>0.0516</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <collision name='base_link_fixed_joint_lump__zed_link_collision_4'>
+        <pose>0.172023 0 0.756475 0 0.174533 0</pose>
+        <geometry>
+          <box>
+            <size>0.0431 0.17525 0.03025</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <ode/>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='base_link_fixed_joint_lump__caster_link_visual'>
+        <pose>-0.625475 0 -0.022225 0 -0 0</pose>
+        <geometry>
+          <sphere>
+            <radius>0.0889</radius>
+          </sphere>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Green</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+      <visual name='base_link_fixed_joint_lump__chassis_link_visual_1'>
+        <pose>0 0 0.3937 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.2032 0.6096 0.7874</size>
+          </box>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Blue</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+      <visual name='base_link_fixed_joint_lump__chassis_link_visual_2'>
+        <pose>0.282575 0 0.1016 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.36195 0.6096 0.2032</size>
+          </box>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Blue</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+      <visual name='base_link_fixed_joint_lump__chassis_link_visual_3'>
+        <pose>-0.295275 0 0.2794 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.38735 0.6096 0.5588</size>
+          </box>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Blue</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+      <visual name='base_link_fixed_joint_lump__chassis_link_visual_4'>
+        <pose>-0.59055 0 0.079375 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.2032 0.6096 0.05715</size>
+          </box>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Blue</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+      <visual name='base_link_fixed_joint_lump__imu_link_visual_5'>
+        <pose>-0.295275 0 0.5638 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.05 0.03 0.01</size>
+          </box>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Purple</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+      <visual name='base_link_fixed_joint_lump__velodyne_base_link_visual_6'>
+        <pose>0 0 0.82677 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/maaz/ws/install/velodyne_description/share/velodyne_description/meshes/VLP16_base_1.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='base_link_fixed_joint_lump__velodyne_base_link_visual_7'>
+        <pose>0 0 0.82677 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/maaz/ws/install/velodyne_description/share/velodyne_description/meshes/VLP16_base_2.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='base_link_fixed_joint_lump__velodyne_visual_8'>
+        <pose>0 0 0.82677 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>file:///home/maaz/ws/install/velodyne_description/share/velodyne_description/meshes/VLP16_scan.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='base_link_fixed_joint_lump__zed_link_visual_9'>
+        <pose>0.172023 0 0.756475 0 0.174533 0</pose>
+        <geometry>
+          <box>
+            <size>0.0431 0.17525 0.03025</size>
+          </box>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Black</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+      <gravity>1</gravity>
+      <sensor name='imu' type='imu'>
+        <always_on>1</always_on>
+        <update_rate>100</update_rate>
+        <visualize>1</visualize>
+        <topic>__default_topic__</topic>
+        <plugin name='imu_controller' filename='libgazebo_ros_imu_sensor.so'>
+          <topicName>imu</topicName>
+          <bodyName>imu_link</bodyName>
+          <updateRateHZ>100.0</updateRateHZ>
+          <gaussianNoise>0.0</gaussianNoise>
+          <xyzOffset>0 0 0</xyzOffset>
+          <rpyOffset>0 0 0</rpyOffset>
+          <frameName>imu_link</frameName>
+          <initialOrientationAsReference>0</initialOrientationAsReference>
+        </plugin>
+        <pose>-0.295275 0 0.5638 0 -0 0</pose>
+      </sensor>
+      <sensor name='velodyne-VLP16' type='gpu_ray'>
+        <visualize>0</visualize>
+        <update_rate>20</update_rate>
+        <ray>
+          <scan>
+            <horizontal>
+              <samples>440</samples>
+              <resolution>1</resolution>
+              <min_angle>-3.14159</min_angle>
+              <max_angle>3.14159</max_angle>
+            </horizontal>
+            <vertical>
+              <samples>16</samples>
+              <resolution>1</resolution>
+              <min_angle>-0.261799</min_angle>
+              <max_angle>0.261799</max_angle>
+            </vertical>
+          </scan>
+          <range>
+            <min>0.3</min>
+            <max>131</max>
+            <resolution>0.001</resolution>
+          </range>
+          <noise>
+            <type>gaussian</type>
+            <mean>0</mean>
+            <stddev>0</stddev>
+          </noise>
+        </ray>
+        <plugin name='gazebo_ros_laser_controller' filename='libgazebo_ros_velodyne_laser.so'>
+          <topicName>/velodyne_points</topicName>
+          <frameName>velodyne</frameName>
+          <min_range>0.9</min_range>
+          <max_range>130.0</max_range>
+          <gaussianNoise>0.008</gaussianNoise>
+        </plugin>
+        <pose>0 0 0.86447 0 -0 0</pose>
+      </sensor>
+      <sensor name='zed' type='depth'>
+        <update_rate>15</update_rate>
+        <visualize>1</visualize>
+        <always_on>1</always_on>
+        <camera>
+          <horizontal_fov>1.91986</horizontal_fov>
+          <image>
+            <width>2560</width>
+            <height>720</height>
+            <format>B8G8R8</format>
+          </image>
+          <clip>
+            <near>0.3</near>
+            <far>20</far>
+          </clip>
+        </camera>
+        <plugin name='zed_controller' filename='libgazebo_ros_camera.so'>
+          <frame_name>zed_optical_link</frame_name>
+          <min_depth>0</min_depth>
+          <max_depth>100</max_depth>
+        </plugin>
+        <pose>0.172023 0 0.756475 0 0.174533 0</pose>
+      </sensor>
+    </link>
+    <joint name='left_wheel_joint' type='revolute'>
+      <pose relative_to='base_link'>0 0.3937 0.046037 0 -0 0</pose>
+      <parent>base_link</parent>
+      <child>left_wheel_link</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <effort>1000</effort>
+          <velocity>1000</velocity>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <damping>0.0001</damping>
+          <friction>0</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='left_wheel_link'>
+      <pose relative_to='left_wheel_joint'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <mass>5</mass>
+        <inertia>
+          <ixx>0.0351761</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.0617501</iyy>
+          <iyz>0</iyz>
+          <izz>0.0351761</izz>
+        </inertia>
+      </inertial>
+      <collision name='left_wheel_link_collision'>
+        <pose>0 0 0 -1.5708 1.5708 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.1016</length>
+            <radius>0.157163</radius>
+          </cylinder>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e+07</kp>
+              <kd>1</kd>
+              <max_vel>1</max_vel>
+              <min_depth>0</min_depth>
+            </ode>
+          </contact>
+          <friction>
+            <ode>
+              <mu>1</mu>
+              <mu2>1</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='left_wheel_link_visual'>
+        <pose>0 0 0 -1.5708 1.5708 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.1016</length>
+            <radius>0.157163</radius>
+          </cylinder>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Green</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+    </link>
+    <joint name='right_wheel_joint' type='revolute'>
+      <pose relative_to='base_link'>0 -0.3937 0.046037 0 -0 0</pose>
+      <parent>base_link</parent>
+      <child>right_wheel_link</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <effort>1000</effort>
+          <velocity>1000</velocity>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <damping>0.0001</damping>
+          <friction>0</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='right_wheel_link'>
+      <pose relative_to='right_wheel_joint'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <mass>5</mass>
+        <inertia>
+          <ixx>0.0351761</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.0617501</iyy>
+          <iyz>0</iyz>
+          <izz>0.0351761</izz>
+        </inertia>
+      </inertial>
+      <collision name='right_wheel_link_collision'>
+        <pose>0 0 0 -1.5708 1.5708 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.1016</length>
+            <radius>0.157163</radius>
+          </cylinder>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e+07</kp>
+              <kd>1</kd>
+              <max_vel>1</max_vel>
+              <min_depth>0</min_depth>
+            </ode>
+          </contact>
+          <friction>
+            <ode>
+              <mu>1</mu>
+              <mu2>1</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='right_wheel_link_visual'>
+        <pose>0 0 0 -1.5708 1.5708 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.1016</length>
+            <radius>0.157163</radius>
+          </cylinder>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Green</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+    </link>
+    <static>0</static>
+    <plugin name='differential_drive_controller' filename='libgazebo_ros_diff_drive.so'>
+      <update_rate>100.0</update_rate>
+      <robot_base_frame>base_link</robot_base_frame>
+      <command_topic>cmd_vel</command_topic>
+      <left_joint>left_wheel_joint</left_joint>
+      <right_joint>right_wheel_joint</right_joint>
+      <wheel_separation>0.7874</wheel_separation>
+      <wheel_diameter>0.31432499999999997</wheel_diameter>
+      <publish_tf>1</publish_tf>
+      <publish_wheel_tf>1</publish_wheel_tf>
+      <max_wheel_acceleration>1.8</max_wheel_acceleration>
+      <max_wheel_torque>30</max_wheel_torque>
+      <odometrySource>encoder</odometrySource>
+      <odometry_topic>odom</odometry_topic>
+      <odometry_frame>odom</odometry_frame>
+      <publish_odom>1</publish_odom>
+      <publish_odom_tf>1</publish_odom_tf>
+      <legacy_mode>0</legacy_mode>
+      <ros_debug_level>na</ros_debug_level>
+    </plugin>
+  </model>
+</sdf>
