@@ -18,7 +18,7 @@ source /opt/ros/humble/setup.bash
 colcon build --symlink-install
 source install/setup.bash)
 
-# Install IVGC World Models
-bash marvin_simulation/world/ivgc_models/install_models.sh)
+# Install IGVC World Models
+bash marvin_simulation/world/igvc_models/install_models.sh)
 
 echo "Setup successful!"
