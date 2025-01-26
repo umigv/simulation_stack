@@ -13,7 +13,7 @@
 <robot xmlns:xacro="http://ros.org/wiki/xacro" name="wheel">
     <xacro:macro name="wheel" params="name mass radius width parent:=base_link *joint_origin">
         <!-- Includes -->
-        <xacro:include filename="$(find marvin_simulation)/urdf/inertia.xacro"/>
+        <xacro:include filename="$(find common_xacro)/urdf/physics/inertia.xacro"/>
 
         <!-- Wheel link -->
         <link name="${name}_link">
