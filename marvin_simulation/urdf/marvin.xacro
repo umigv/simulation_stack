@@ -24,8 +24,8 @@
 
     <!-- Caster -->
     <xacro:include filename="$(find common_xacro)/urdf/wheel/caster.xacro"/>
-	<xacro:caster name="caster" mass="${caster_mass}" radius="${caster_radius}">
-        <origin xyz="${caster_x_offset} 0 ${caster_radius-chassis_z_offset}" rpy="0 0 0" />
+	<xacro:caster name="caster">
+        <origin xyz="${caster_x_offset} 0 ${caster_z_offset}" rpy="0 0 0" />
 	</xacro:caster>
 
 

@@ -28,14 +28,14 @@
 
 	<!-- Caster Constants -->
     <xacro:property name="caster_x_offset" value="${-24.625*0.0254}"/>
-    <xacro:property name="caster_radius" value="${3.5*0.0254}"/>
-    <xacro:property name="caster_mass" value="0.1"/>
+    <xacro:property name="caster_z_offset" value="${-0.875*0.0254}"/>
 
 	<!-- Wheel Constants -->
+    <xacro:property name="track_width" value="${31*0.0254}"/>
+
     <xacro:property name="wheel_radius" value="${6.1875*0.0254}"/>
     <xacro:property name="wheel_width" value="${4*0.0254}"/>
     <xacro:property name="wheel_mass" value="5"/>
-    <xacro:property name="track_width" value="${31*0.0254}"/>
 
     <!-- Lidar Constants -->
     <xacro:property name="lidar_height" value="${32.55*0.0254}"/>
