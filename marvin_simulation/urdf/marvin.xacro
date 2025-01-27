@@ -31,11 +31,11 @@
 
     <!-- Wheels -->
     <xacro:include filename="$(find common_xacro)/urdf/wheel/wheel.xacro"/>
-	<xacro:wheel name="right_wheel" mass="${wheel_mass}" radius="${wheel_radius}" width="${wheel_width}">
-		<origin xyz="0 -${track_width / 2} ${wheel_radius-chassis_z_offset}" rpy="0 0 0" />
+	<xacro:wheel name="right_wheel">
+		<origin xyz="0 ${-wheel_x_offset} ${wheel_z_offset}" rpy="0 0 0" />
 	</xacro:wheel>
-	<xacro:wheel name="left_wheel" mass="${wheel_mass}" radius="${wheel_radius}" width="${wheel_width}">
-		<origin xyz="0 ${track_width/2} ${wheel_radius-chassis_z_offset}" rpy="0 0 0" />
+	<xacro:wheel name="left_wheel">
+		<origin xyz="0 ${wheel_x_offset} ${wheel_z_offset}" rpy="0 0 0" />
 	</xacro:wheel>
 
 
@@ -64,7 +64,7 @@
     <link name="encoder" />
 
 	<joint name="encoder_joint" type="fixed">
-		<origin xyz="0 0 ${wheel_radius-chassis_z_offset}" rpy="0 0 0" />
+		<origin xyz="0 0 ${wheel_z_offset}" rpy="0 0 0" />
 		<parent link="base_link" />
 		<child link="encoder" />
 		<axis xyz="0 1 0" />

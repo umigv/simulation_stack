@@ -9,8 +9,8 @@
 
 			<left_joint>left_wheel_joint</left_joint>
 			<right_joint>right_wheel_joint</right_joint>
-			<wheel_separation>${track_width}</wheel_separation>
-			<wheel_diameter>${2 * wheel_radius}</wheel_diameter>
+			<wheel_separation>${2 * wheel_x_offset}</wheel_separation>
+			<wheel_diameter>${2 * 6.1875*0.0254}</wheel_diameter>
 			<publish_tf>true</publish_tf>
 			<publish_wheel_tf>true</publish_wheel_tf>
 
