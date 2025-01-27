@@ -35,7 +35,7 @@
     <xacro:property name="wheel_z_offset" value="${1.8125*0.0254}"/>
 
     <!-- Lidar Constants -->
-    <xacro:property name="lidar_height" value="${32.55*0.0254}"/>
+    <xacro:property name="lidar_z_offset" value="${32.55*0.0254}"/>
 
     <!-- Camera Constants -->
     <xacro:property name="camera_angle" value="${10 * 0.01745327777}"/>
