@@ -6,32 +6,34 @@
 <!-- Joint Type: fixed -->
 <!-- Plugin: libgazebo_ros_imu_sensor.so -->
 <!-- Param name: the name of the IMU. Published topic is /{name}_controller/out -->
-<!-- Param mass: mass of the IMU -->
-<!-- Param length: length of the IMU -->
-<!-- Param width: width of the IMU -->
-<!-- Param height: height of the IMU -->
 <!-- Param parent: name of the parent link, defaulted to base_link -->
 <!-- Param joint_origin: location of the IMU relative to parent link -->
 <robot xmlns:xacro="http://ros.org/wiki/xacro" name="caster">
-    <xacro:macro name="imu" params="name mass length width height parent:=base_link *joint_origin">
+    <xacro:macro name="imu" params="name parent:=base_link *joint_origin">
         <!-- Includes -->
         <xacro:include filename="$(find common_xacro)/urdf/physics/inertia.xacro"/>
 
+        <!-- Constants -->
+        <xacro:property name="mass" value="0.025"/>
+        <xacro:property name="length" value="0.05"/>
+        <xacro:property name="width" value="0.03"/>
+        <xacro:property name="height" value="0.01"/>
+
         <!-- Imu base link -->
-        <link name="${name}_base_link" />
+        <link name="${name}_base_link"/>
 
         <joint name="${name}_base_joint" type="fixed">
-            <xacro:insert_block name="joint_origin" />
-            <parent link="${parent}" />
-            <child link="${name}_base_link" />
-            <axis xyz="0 1 0" />
+            <xacro:insert_block name="joint_origin"/>
+            <parent link="${parent}"/>
+            <child link="${name}_base_link"/>
+            <axis xyz="0 1 0"/>
         </joint>
 
 
         <!-- Imu link -->
         <link name="${name}_link">
 		    <xacro:box_inertia mass="${mass}" length="${length}" width="${width}" height="${height}">
-                <origin xyz="0 0 0" rpy="0 0 0" />
+                <origin xyz="0 0 0" rpy="0 0 0"/>
             </xacro:box_inertia>
 
             <visual>
@@ -51,8 +53,8 @@
 
         <joint name="${name}_joint" type="fixed">
             <origin xyz="0 0 ${height/2}" rpy="0 0 0"/>
-            <parent link="${name}_base_link" />
-            <child link="${name}_link" />
+            <parent link="${name}_base_link"/>
+            <child link="${name}_link"/>
         </joint>
 
 

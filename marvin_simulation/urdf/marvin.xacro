@@ -55,7 +55,7 @@
 
 	<!-- IMU -->
     <xacro:include filename="$(find common_xacro)/urdf/sensor/imu.xacro" />
-    <xacro:imu name="imu" mass="${imu_mass}" length="${imu_length}" width="${imu_width}" height="${imu_height}">
+    <xacro:imu name="imu">
 		<origin xyz="${-chassis_tower_length / 2 - chassis_electrical_length/2} 0 ${chassis_electrical_height}" rpy="0 0 0" />
     </xacro:imu>
 
