@@ -41,7 +41,7 @@
 
     <!-- Camera -->
 	<xacro:include filename="$(find common_xacro)/urdf/sensor/depth_camera.xacro" />
-	<xacro:depth_camera name="zed" mass="${camera_mass}" length = "${camera_length}" width="${camera_width}" height="${camera_height}" parent="base_link">
+	<xacro:depth_camera name="zed">
 		<origin xyz="${camera_x_offset} 0 ${camera_z_offset}" rpy="0 ${camera_angle} 0" />
 	</xacro:depth_camera>
 
