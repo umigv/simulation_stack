@@ -8,7 +8,8 @@ import os
 
 def generate_launch_description():
     # Constants
-    package_directory = get_package_share_directory('marvin_simulation')
+    package_directory = get_package_share_directory('simulation_marvin')
+    world_directory = get_package_share_directory('simulation_common')
     cwd = os.path.join(package_directory, 'launch')
     model = os.path.join(package_directory, 'urdf', 'marvin.xacro')
     rviz_config = os.path.join(package_directory, 'rviz', 'simulation.rviz')
@@ -42,7 +43,7 @@ def generate_launch_description():
             'gzserver',
             '-s', 'libgazebo_ros_init.so',
             '-s', 'libgazebo_ros_factory.so',
-            [package_directory, '/world/', LaunchConfiguration('world'), '.world']],
+            [world_directory, '/world/', LaunchConfiguration('world'), '.world']],
         output='screen',
         cwd=[cwd]
     )

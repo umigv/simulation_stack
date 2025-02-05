@@ -11,7 +11,7 @@
 <robot xmlns:xacro="http://ros.org/wiki/xacro" name="caster">
     <xacro:macro name="imu" params="name parent:=base_link *joint_origin">
         <!-- Includes -->
-        <xacro:include filename="$(find common_xacro)/urdf/physics/inertia.xacro"/>
+        <xacro:include filename="$(find simulation_common)/urdf/physics/inertia.xacro"/>
 
         <!-- Constants -->
         <xacro:property name="mass" value="0.025"/>

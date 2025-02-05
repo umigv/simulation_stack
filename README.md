@@ -35,9 +35,9 @@ The simulation is fairly computation intensive so a GPU is recommended. Note tha
 4. ```source install/setup.bash```
 
 ### Launching
-Running ```ros2 launch marvin_simulation display.launch.py``` will open RViz and display the robot model. This launch file is made to quickly check if the robot model is correctly formatted and used internally when developing the stack.
+Running ```ros2 launch simulation_marvin display.launch.py``` will open RViz and display the robot model. This launch file is made to quickly check if the robot model is correctly formatted and used internally when developing the stack.
 
-Running ```ros2 launch marvin_simulation simulation.launch.py``` will spawn the robot in Gazebo and visualize sensor outputs in RViz. Any project interfacing with the simulation should use this launch file.
+Running ```ros2 launch simulation_marvin simulation.launch.py``` will spawn the robot in Gazebo and visualize sensor outputs in RViz. Any project interfacing with the simulation should use this launch file.
 
 
 ## Interfacing with the Stack
@@ -101,4 +101,4 @@ This error is caused by [snap variables leaking into terminal variables](https:/
 ## Credits
 Jason Ning and Kari Naga on the sensors team, who created the original URDF files and the Gazebo World in the [marvin](https://github.com/umigv/marvin/tree/main/urdf) repository.  
 
-[UTRA ART](https://github.com/UTRA-ART) for their [full IGVC course world](https://github.com/UTRA-ART/Caffeine/tree/master/worlds/). Any file or folder containing IGVC is under the original [Apache 2.0 license](https://github.com/umigv/simulation_stack/blob/igvc_course/marvin_simulation/world/LICENSE)
+[UTRA ART](https://github.com/UTRA-ART) for their [full IGVC course world](https://github.com/UTRA-ART/Caffeine/tree/master/worlds/). Any file or folder containing IGVC is under the original [Apache 2.0 license](https://github.com/umigv/simulation_stack/blob/igvc_course/simulation_marvin/world/LICENSE)

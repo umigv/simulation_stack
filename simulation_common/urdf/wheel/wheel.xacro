@@ -10,7 +10,7 @@
 <robot xmlns:xacro="http://ros.org/wiki/xacro" name="wheel">
     <xacro:macro name="wheel" params="name parent:=base_link *joint_origin">
         <!-- Includes -->
-        <xacro:include filename="$(find common_xacro)/urdf/physics/inertia.xacro"/>
+        <xacro:include filename="$(find simulation_common)/urdf/physics/inertia.xacro"/>
 
         <!-- Constants -->
         <xacro:property name="radius" value="${6.1875*0.0254}"/>
