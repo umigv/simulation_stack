@@ -9,7 +9,7 @@ def generate_launch_description():
     # Constants
     package_directory = get_package_share_directory('simulation_marvin')
     model = os.path.join(package_directory, 'urdf', 'marvin.xacro')
-    rviz_config = os.path.join(package_directory, 'rviz', 'display.rviz')
+    #rviz_config = os.path.join(package_directory, 'rviz', 'display.rviz')
 
     # Arguments
     enable_joint_publisher_launch_arg = DeclareLaunchArgument(
@@ -46,7 +46,7 @@ def generate_launch_description():
         executable='rviz2',
         name='rviz2',
         output='screen',
-        arguments=['-d', rviz_config],
+        #arguments=['-d', rviz_config],
     )
 
     #Launch Description
