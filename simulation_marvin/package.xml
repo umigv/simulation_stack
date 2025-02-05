@@ -3,7 +3,7 @@
 <package format="3">
   <name>simulation_marvin</name>
   <version>1.0.0</version>
-  <description>Simulation model for ARV's 2022-2024 robot "Marvin"</description>
+  <description>Simulation model for ARV's 2024 robot "Marvin"</description>
   <maintainer email="ryanliao@umich.edu">Ryan Liao</maintainer>
   <license>MIT</license>
 

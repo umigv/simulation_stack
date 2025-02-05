@@ -2,15 +2,13 @@ from ament_index_python.packages import get_package_share_directory
 import launch
 import launch_ros
 from launch.actions import DeclareLaunchArgument
-from launch.substitutions import Command, LaunchConfiguration
+from launch.substitutions import Command, LaunchConfiguration, PathJoinSubstitution
+from launch_ros.substitutions import FindPackageShare
 import os
 
-def generate_launch_description():
-    # Constants
-    package_directory = get_package_share_directory('simulation_marvin')
-    model = os.path.join(package_directory, 'urdf', 'marvin.xacro')
-    #rviz_config = os.path.join(package_directory, 'rviz', 'display.rviz')
+DEFAULT_MODEL_NAME = 'marvin'
 
+def generate_launch_description():
     # Arguments
     enable_joint_publisher_launch_arg = DeclareLaunchArgument(
         name='joint_gui', 
@@ -18,11 +16,26 @@ def generate_launch_description():
         description='Flag to enable joint_state_publisher_gui'
     )
 
+    model_launch_arg = DeclareLaunchArgument(
+        name = 'model',
+        default_value = DEFAULT_MODEL_NAME,
+        description = 'name of the robot model'
+    )
+
+    # Constants
+    package_directory = get_package_share_directory('simulation_common')
+    rviz_config = os.path.join(package_directory, 'rviz', 'display.rviz')
+    xacro_file_path = PathJoinSubstitution([
+        FindPackageShare(["simulation_", LaunchConfiguration('model')]),
+        'urdf',
+        'model.xacro'
+    ])
+
     # Robot Node
     robot_state_publisher_node = launch_ros.actions.Node(
         package='robot_state_publisher',
         executable='robot_state_publisher',
-        parameters=[{'robot_description': Command(['xacro ', model])}]
+        parameters=[{'robot_description': Command(['xacro ', xacro_file_path])}]
     )
 
     # Wheel Node
@@ -46,12 +59,13 @@ def generate_launch_description():
         executable='rviz2',
         name='rviz2',
         output='screen',
-        #arguments=['-d', rviz_config],
+        arguments=['-d', rviz_config],
     )
 
     #Launch Description
     return launch.LaunchDescription([
         enable_joint_publisher_launch_arg,
+        model_launch_arg,
         joint_state_publisher_node,
         joint_state_publisher_gui_node,
         robot_state_publisher_node,
