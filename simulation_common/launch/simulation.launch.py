@@ -70,7 +70,7 @@ def generate_launch_description():
         package='gazebo_ros', 
         executable='spawn_entity.py',
         arguments=['-topic', 'robot_description', 
-                    '-entity', 'marvin'],
+                    '-entity', LaunchConfiguration('model')],
         output='screen'
     )
 
