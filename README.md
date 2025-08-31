@@ -1,6 +1,10 @@
 # Simulation Stack
 This package allows you to simulate Marvin (ARV's 2022-2024 robot) using RViz and Gazebo
 
+## WARNING FOR MAC USERS
+- The current infrastructure requires an x64 computer, which means you can't run it on Apple Silicon Macs.
+  - If you want to work around this, you will need to dedicate time to upgrading the gazebo version required by us and our dependencies
+
 
 ## Package Dependencies
 - [Velodyne Simulator](https://github.com/umigv/velodyne_simulator), which simulates our LiDAR.
