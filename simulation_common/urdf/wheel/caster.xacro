@@ -5,14 +5,16 @@
 <!-- Mounting Location: center of the sphere -->
 <!-- Joint Type: fixed -->
 <!-- Param name: the name of the caster -->
-<!-- Param mass: mass of the caster -->
-<!-- Param radius: radius of the caster -->
 <!-- Param parent: name of the parent link, defaulted to base_link -->
 <!-- Param joint_origin: location of the caster relative to parent link -->
 <robot xmlns:xacro="http://ros.org/wiki/xacro" name="caster">
-    <xacro:macro name="caster" params="name mass radius parent:=base_link *joint_origin">
+    <xacro:macro name="caster" params="name parent:=base_link *joint_origin">
         <!-- Includes -->
-        <xacro:include filename="$(find common_xacro)/urdf/physics/inertia.xacro"/>
+        <xacro:include filename="$(find simulation_common)/urdf/physics/inertia.xacro"/>
+
+        <!-- Constants -->
+        <xacro:property name="radius" value="${3.5*0.0254}"/>
+        <xacro:property name="mass" value="0.1"/>
 
         <!-- Caster link -->
         <link name="${name}_link">

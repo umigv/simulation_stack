@@ -6,16 +6,18 @@
 <!-- Joint Type: fixed -->
 <!-- Plugin: libgazebo_ros_camera.so (depth camera) -->
 <!-- Param name: the name of the depth camera. All published topics will start with /{name} -->
-<!-- Param mass: mass of the depth camera -->
-<!-- Param length: length of the depth camera -->
-<!-- Param width: width of the depth camera -->
-<!-- Param height: height of the depth camera -->
 <!-- Param parent: name of the parent link, defaulted to base_link -->
 <!-- Param joint_origin: location of the depth camera relative to parent link -->
 <robot xmlns:xacro="http://ros.org/wiki/xacro" name="depth_camera">
-    <xacro:macro name="depth_camera" params="name mass length width height parent:=base_link *joint_origin">
+    <xacro:macro name="depth_camera" params="name parent:=base_link *joint_origin">
         <!-- Includes -->
-        <xacro:include filename="$(find common_xacro)/urdf/physics/inertia.xacro"/>
+        <xacro:include filename="$(find simulation_common)/urdf/physics/inertia.xacro"/>
+        
+        <!-- Constants -->
+        <xacro:property name="mass" value="0.230"/>
+        <xacro:property name="length" value="0.04310"/>
+        <xacro:property name="width" value="0.17525"/>
+        <xacro:property name="height" value="0.03025"/>
 
         <!-- Depth camera base link -->
         <link name="${name}_base_link" />

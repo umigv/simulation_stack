@@ -19,6 +19,6 @@ colcon build --symlink-install
 source install/setup.bash)
 
 # Install IGVC World Models
-bash marvin_simulation/world/igvc_models/install_models.sh)
+bash simulation_common/world/igvc_models/install_models.sh)
 
 echo "Setup successful!"

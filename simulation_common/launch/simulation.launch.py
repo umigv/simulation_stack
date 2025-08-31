@@ -2,22 +2,19 @@ from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch_ros.actions import Node
 from launch.actions import DeclareLaunchArgument, ExecuteProcess
-from launch.substitutions import Command, LaunchConfiguration
+from launch.substitutions import Command, LaunchConfiguration, PathJoinSubstitution
+from launch_ros.substitutions import FindPackageShare
 from launch.conditions import UnlessCondition
 import os
 
-def generate_launch_description():
-    # Constants
-    package_directory = get_package_share_directory('marvin_simulation')
-    cwd = os.path.join(package_directory, 'launch')
-    model = os.path.join(package_directory, 'urdf', 'marvin.xacro')
-    rviz_config = os.path.join(package_directory, 'rviz', 'simulation.rviz')
-    default_world_name = 'empty'
+DEFAULT_MODEL_NAME = 'marvin'
+DEFAULT_WORLD_NAME = 'empty'
 
+def generate_launch_description():
     # Arguments
     world_launch_arg = DeclareLaunchArgument(
         name='world',
-        default_value=default_world_name,
+        default_value = DEFAULT_WORLD_NAME,
         description='Name of world file in the world directory'
     )
 
@@ -27,13 +24,29 @@ def generate_launch_description():
         description='Show RViz and Gazebo'
     )
 
+    model_launch_arg = DeclareLaunchArgument(
+        name = 'model',
+        default_value = DEFAULT_MODEL_NAME,
+        description = 'name of the robot model'
+    )
+
+    # Variables
+    package_directory = get_package_share_directory('simulation_common')
+    cwd = os.path.join(package_directory, 'launch')
+    rviz_config = os.path.join(package_directory, 'rviz', 'simulation.rviz')
+    xacro_file_path = PathJoinSubstitution([
+        FindPackageShare(["simulation_", LaunchConfiguration('model')]),
+        'urdf',
+        'model.xacro'
+    ])
+
     # Robot node
     robot_state_publisher_node = Node(
         package='robot_state_publisher',
         executable='robot_state_publisher',
         output='screen',
-        parameters=[{'robot_description': Command(['xacro ', model]),
-                     'use_sim_time': True}]
+        parameters=[{'robot_description': Command(['xacro ', xacro_file_path]), 
+                     'use_sim_time': True}] 
     )
 
     # Gazebo node
@@ -57,7 +70,7 @@ def generate_launch_description():
         package='gazebo_ros', 
         executable='spawn_entity.py',
         arguments=['-topic', 'robot_description', 
-                    '-entity', 'marvin'],
+                    '-entity', LaunchConfiguration('model')],
         output='screen'
     )
 
@@ -90,6 +103,7 @@ def generate_launch_description():
     return LaunchDescription([
         world_launch_arg,
         headless_launch_arg,
+        model_launch_arg,
         robot_state_publisher_node,
         gazebo_server, 
         gazebo_client,
