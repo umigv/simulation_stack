@@ -6,7 +6,7 @@ This package allows you to simulate Marvin (ARV's 2022-2024 robot) using RViz an
 - [Velodyne Simulator](https://github.com/umigv/velodyne_simulator), which simulates our LiDAR.
 - [pointcloud_to_laserscan](https://github.com/ros-perception/pointcloud_to_laserscan), which converts our LiDAR's point cloud to laser scan
 - Packages installed with apt-get can be found in [setup.bash](https://github.com/umigv/simulation_stack/blob/main/scripts/setup.bash)
-- If you are not using the [official ARV environment](https://github.com/umigv/environment), you should have ROS2 humble installed through the tutorial [here](https://docs.ros.org/en/humble/Installation/Alternatives/Ubuntu-Development-Setup.html)
+- If you are not using the [official Nav VM](https://github.com/umigv/nav-onboarding-2025), you should have ROS2 humble installed through the tutorial [here](https://docs.ros.org/en/humble/Installation/Alternatives/Ubuntu-Development-Setup.html)
 
 
 ## Requirements
